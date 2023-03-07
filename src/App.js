@@ -11,6 +11,9 @@ function App() {
   const n = 5;
   
   const [board, setBoard] = useState(Array.from({length: n},()=> Array.from({length: n}, () => 0)));
+  const [fromPos, setFromPos] = useState(null);
+  const [toPos, setToPos] = useState(null);
+
 
   function init_board(size) {
     let board = Array.from({length: size},()=> Array.from({length: size}, () => 0));
@@ -33,6 +36,22 @@ function App() {
     setBoard(board);
   }
 
+function dragStart(e){
+    console.log("drag start");
+    setFromPos(e.target);
+    console.log(fromPos)
+}
+
+function dragDrop(e){
+    console.log("drag drop");
+    setToPos(e.target);
+    console.log(toPos);
+}
+
+function dragEnd(e){
+    console.log("drag end");
+}
+
   useEffect(() => {
     init_board(n);
   }, []);
@@ -40,7 +59,7 @@ function App() {
   return (
       <div className='center'>
         <div className='title'>KING'S VALLEY
-        <Board board={board} size={n}/>
+        <Board board={board} size={n} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
       </div>
     </div>
   );

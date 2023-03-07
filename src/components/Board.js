@@ -1,27 +1,14 @@
 import { React } from 'react';
 
-function dragStart(){
-    console.log("drag start");
-}
-
-
-function dragDrop(){
-    console.log("drag drop");
-}
-
-
-function dragEnd(){
-    console.log("drag end");
-}
-
-function renderImages(board, size){
+function renderImages(board, size, dragStart, dragDrop, dragEnd){
     const game = []
     console.log(board)
     for(let i=0; i<size; i++){
         for(let j=0; j<size; j++){
             console.log(board[i][j]);
             game.push(<img 
-                data-id={i+","+j} 
+                pos_i={i}
+                pos_j={j} 
                 key={i+","+j} 
                 src={"images/"+board[i][j]+".png"} 
                 alt={board[i][j]}
@@ -38,11 +25,11 @@ function renderImages(board, size){
     return game;
 }
 
-function Board({board, size}) {
+function Board({board, size, dragStart, dragDrop, dragEnd}) {
     return(
     <div className='board_enclosure'>
         <div className="board">
-            {renderImages(board, size)}
+            {renderImages(board, size, dragStart, dragDrop, dragEnd)}
         </div>
     </div>
     );
