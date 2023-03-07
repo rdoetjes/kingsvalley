@@ -36,21 +36,21 @@ function App() {
     setBoard(board);
   }
 
-function dragStart(e){
-    console.log("drag start");
-    setFromPos(e.target);
-    console.log(fromPos)
-}
+  function dragStart(e){
+      console.log("drag start");
+      setFromPos(e.target);
+      console.log(fromPos)
+  }
 
-function dragDrop(e){
-    console.log("drag drop");
-    setToPos(e.target);
-    console.log(toPos);
-}
+  function dragDrop(e){
+      console.log("drag drop");
+      setToPos(e.target);
+      console.log(toPos);
+  }
 
-function dragEnd(e){
-    console.log("drag end");
-}
+  function dragEnd(e){
+      console.log("drag end");
+  }
 
   useEffect(() => {
     init_board(n);
