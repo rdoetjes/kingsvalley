@@ -50,6 +50,17 @@ function App() {
 
   function dragEnd(e){
       console.log("drag end");
+      const is = fromPos.getAttribute("pos_i");
+      const js = fromPos.getAttribute("pos_j");
+      const it = toPos.getAttribute("pos_i");
+      const jt = toPos.getAttribute("pos_j");
+
+      const t = board[is][js];
+      board[is][js]=0;
+      board[it][jt]=t;
+
+      console.log(board);
+      setBoard([...board]);
   }
 
   useEffect(() => {
