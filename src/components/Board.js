@@ -16,7 +16,6 @@ function renderImages(board, size){
 function Board({board, size}) {
     return(
     <div className='board_enclosure'>
-        <div className='title'>KING'S VALLEY</div>
         <div className="board">
             {renderImages(board, size)}
         </div>

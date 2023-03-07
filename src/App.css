@@ -10,20 +10,26 @@ body {
   justify-content: center;
 }
 
+.title{
+  padding-top: 10px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 3pc;
+  color: rgb(100, 71, 36);
+}
+
+.board_enclosure {
+  border: 8px solid rgb(48, 46, 40);
+  border-radius: 5px;
+  padding-left: 0;
+}
+
 .board {
   width: 500px;
   height: 500px;
   background-image: url('http://localhost:3002/images/bg_board.png');
   display: flex;
   flex-wrap: wrap;
-}
-
-.title{
-  align-items:center;
-  justify-content: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 60;
-  color: blanchedalmond;
 }
 
 img {

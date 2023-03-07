@@ -38,8 +38,10 @@ function App() {
   }, []);
 
   return (
-    <div className='center'>
-      <Board board={board} size={n}/>
+      <div className='center'>
+        <div className='title'>KING'S VALLEY
+        <Board board={board} size={n}/>
+      </div>
     </div>
   );
 }
