@@ -1,5 +1,6 @@
 body {
- background-color: bisque;
+  background-image: url('http://localhost:3002/images/bg.webp'); 
+  background-size: cover;
 }
 
 .center{
@@ -10,12 +11,19 @@ body {
 }
 
 .board {
-  position: absolute;
   width: 500px;
   height: 500px;
   background-image: url('http://localhost:3002/images/bg_board.png');
   display: flex;
   flex-wrap: wrap;
+}
+
+.title{
+  align-items:center;
+  justify-content: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 60;
+  color: blanchedalmond;
 }
 
 img {

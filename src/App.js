@@ -12,7 +12,7 @@ function App() {
   
   const [board, setBoard] = useState(Array.from({length: n},()=> Array.from({length: n}, () => 0)));
 
-  function create_board(size) {
+  function init_board(size) {
     let board = Array.from({length: size},()=> Array.from({length: size}, () => 0));
     const blackPieces=[BB, BB, BF, BB, BB];
     const whitePieces=[WB, WB, WF, WB, WB];
@@ -34,7 +34,7 @@ function App() {
   }
 
   useEffect(() => {
-    create_board(n);
+    init_board(n);
   }, []);
 
   return (
