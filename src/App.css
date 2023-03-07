@@ -1,5 +1,5 @@
 body {
-  background-image: url('http://localhost:3002/images/bg.webp'); 
+  background-image: url('images/bg.webp'); 
   background-size: cover;
 }
 
@@ -27,7 +27,7 @@ body {
 .board {
   width: 500px;
   height: 500px;
-  background-image: url('http://localhost:3002/images/bg_board.png');
+  background-image: url('images/bg_board.png');
   display: flex;
   flex-wrap: wrap;
 }
