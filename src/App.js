@@ -173,7 +173,7 @@ function App() {
     return false;
   }
 
-  function init_board(size) {
+  function initBoard(size) {
     let board = Array.from({length: size},()=> Array.from({length: size}, () => 0));
     const blackPieces=[BB, BB, BF, BB, BB];
     const whitePieces=[WB, WB, WF, WB, WB];
@@ -191,7 +191,6 @@ function App() {
         }
       }
     }
-    //board[Math.floor(n/2)][Math.floor(n/2)] = -1;
     setBoard(board);
   }
 
@@ -228,14 +227,19 @@ function App() {
       setBoard([...board]);
   }
 
+  function restartGame(){
+    initBoard(n);
+  }
+
   useEffect(() => {
-    init_board(n);
+    initBoard(n);
   }, []);
 
   return (
       <div className='center'>
         <div className='title'>KING'S VALLEY
         <Board board={board} size={n} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
+        <button onClick={restartGame}>RESTART</button>
       </div>
     </div>
   );
