@@ -81,6 +81,7 @@ function App() {
     obstacle = false
     for(let x = from_x, y = from_y; x<n; x++){
       if (from_x!==x && board[y][x]!==0){
+        console.log(x, y, board[y][x]);
         possiblePos[4][0]=x-1;
         possiblePos[4][1]=y;
         obstacle = true;
@@ -139,6 +140,16 @@ function App() {
     return possiblePos;
   }
 
+  function pruneOwnLocation(possiblePos, from_x, from_y){
+    for(let i=0; i<=possiblePos.length-1; i++){
+      if ( possiblePos[i][0] === from_x &&  possiblePos[i][1] === from_y ){
+        possiblePos[i][0] = null;
+        possiblePos[i][1] = null;
+      }
+    }
+    return possiblePos;
+  }
+
   function pruneCenterSquareAsLegalMove(possiblePos){
     for(let i=0; i<=possiblePos.length-1; i++){
       if ( possiblePos[i][0] === Math.floor(n/2) &&  (possiblePos[i][1] === Math.floor(n/2)) ){
@@ -151,7 +162,11 @@ function App() {
 
   function getAllMovesForSelectedPiece(board, from_x, from_y){
     const piece = board[from_y][from_x];
+    
     let moves = getAllMovesPiece(board, from_x, from_y);
+    moves = pruneOwnLocation(moves,from_x, from_y);
+
+    console.log(from_x, from_y, moves);
 
     if (piece===WB || piece===BB){
       return pruneCenterSquareAsLegalMove(moves);
