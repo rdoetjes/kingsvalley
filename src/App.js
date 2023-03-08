@@ -14,9 +14,11 @@ function App() {
   const [fromPos, setFromPos] = useState(null);
   const [toPos, setToPos] = useState(null);
   const [legalMove, setLegalMove] = useState(false);
+  const [player, setPlayer] = useState(0);
   
   function getAllMovesPiece(board, from_x, from_y){
     let possiblePos = Array.from({length: 8},()=> Array.from({length: 2}, () => null))
+    //TODO: refector into loose methods
      //diagonal down right
      let obstacle = false;
      for (let x = from_x, y = from_y; x >=0 && y < n; x--, y++){
@@ -160,28 +162,33 @@ function App() {
     return possiblePos;
   }
 
-  function getAllMovesForSelectedPiece(board, from_x, from_y){
+  function getAllValidMovesForSelectedPiece(board, from_x, from_y){
     const piece = board[from_y][from_x];
     
     let moves = getAllMovesPiece(board, from_x, from_y);
     moves = pruneOwnLocation(moves,from_x, from_y);
 
-    console.log(from_x, from_y, moves);
-
-    if (piece===WB || piece===BB){
+    if (piece===WB || piece===BB)
       return pruneCenterSquareAsLegalMove(moves);
-    }
 
-    if (piece===WF || piece===BF) 
-      return moves;
+    return moves;
   }
 
-  function isLegalMove(board, from_x, from_y, to_x, to_y){
-    let possiblePos = getAllMovesForSelectedPiece(board, from_x, from_y);
+  function isLegalMove(player, board, from_x, from_y, to_x, to_y){
+    const piece = board[from_y][from_x];
+    console.log("player:", player, board, "x", from_x, "y", from_y, "piece", piece); 
+
+    if (player === 0 && !(piece===WB || piece===WF))
+      return false;
+
+    if (player === 1 && !(piece===BB || piece===BF))
+      return false;
+
+    let possiblePos = getAllValidMovesForSelectedPiece(board, from_x, from_y);
     
-    for(let i=0; i < possiblePos.length; i++)
+    for(let i=0; i < possiblePos.length-1; i++)
       if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) {
-        console.log("legal move");
+        setPlayer(player^1);
         return true;
       }
 
@@ -207,10 +214,11 @@ function App() {
       }
     }
     setBoard(board);
+    setPlayer(0);
   }
 
-  function dragStart(e){    
-    setFromPos(e.target);
+  function dragStart(e){   
+    setFromPos(e.target);        
   }
 
   function dragDrop(e){
@@ -219,7 +227,7 @@ function App() {
       const to_x = parseInt(e.target.getAttribute("pos_j"));
       const to_y =  parseInt(e.target.getAttribute("pos_i"));
 
-      if (!isLegalMove(board, from_x, from_y, to_x, to_y)){ 
+      if (!isLegalMove(player, board, from_x, from_y, to_x, to_y)){ 
         setLegalMove(false); 
         return;
       }
@@ -246,13 +254,17 @@ function App() {
     initBoard(n);
   }
 
+  function playerColor(player){
+    return player===0?"WHITE":"BLACK";
+  }
+
   useEffect(() => {
     initBoard(n);
   }, []);
 
   return (
       <div className='center'>
-        <div className='title'>KING'S VALLEY
+        <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)}
         <Board board={board} size={n} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
         <button onClick={restartGame}>RESTART</button>
       </div>
