@@ -17,9 +17,6 @@ function App() {
   
   function getAllMovesPiece(board, from_x, from_y){
     let possiblePos = Array.from({length: 8},()=> Array.from({length: 2}, () => null))
-
-    console.log("coming from: ", board[from_y][from_x], from_x, from_y);
-
      //diagonal down right
      let obstacle = false;
      for (let x = from_x, y = from_y; x >=0 && y < n; x--, y++){
@@ -139,14 +136,11 @@ function App() {
         possiblePos[7][1]=y;
       }
     }
-    console.log(possiblePos);
     return possiblePos;
   }
 
   function pruneCenterSquareAsLegalMove(possiblePos){
-    console.log(possiblePos);
     for(let i=0; i<=possiblePos.length-1; i++){
-      console.log(i);
       if ( possiblePos[i][0] === Math.floor(n/2) &&  (possiblePos[i][1] === Math.floor(n/2)) ){
         possiblePos[i][0] = null;
         possiblePos[i][1] = null;
