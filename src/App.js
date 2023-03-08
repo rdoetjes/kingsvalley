@@ -139,6 +139,7 @@ function App() {
         possiblePos[7][1]=y;
       }
     }
+  
     return possiblePos;
   }
 
@@ -185,8 +186,9 @@ function App() {
       return false;
 
     let possiblePos = getAllValidMovesForSelectedPiece(board, from_x, from_y);
-    
-    for(let i=0; i < possiblePos.length-1; i++)
+    console.log(possiblePos);
+
+    for(let i=0; i < possiblePos.length; i++)
       if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) {
         setPlayer(player^1);
         return true;
