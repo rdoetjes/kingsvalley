@@ -2,10 +2,8 @@ import { React } from 'react';
 
 function renderImages(board, size, dragStart, dragDrop, dragEnd){
     const game = []
-    console.log(board)
     for(let i=0; i<size; i++){
         for(let j=0; j<size; j++){
-            console.log(board[i][j]);
             game.push(<img 
                 pos_i={i}
                 pos_j={j} 

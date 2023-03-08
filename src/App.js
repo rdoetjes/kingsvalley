@@ -13,7 +13,47 @@ function App() {
   const [board, setBoard] = useState(Array.from({length: n},()=> Array.from({length: n}, () => 0)));
   const [fromPos, setFromPos] = useState(null);
   const [toPos, setToPos] = useState(null);
+  const [legalMove, setLegalMove] = useState(false);
+  
+  function getAllDiagonalMovesBeetle(board, from_x, from_y){
+    let possiblePos = Array.from({length: 4},()=> Array.from({length: 2}, () => null))
 
+    console.log(from_x, from_y);
+     //diagonal down right
+     for (let x = from_x, y = from_y; x >=0 && y < n; x--, y++){
+        if (from_x!==x && from_y!==y && board[y][x]===0){
+          console.log(x, y);
+          possiblePos[0][0]=x;
+          possiblePos[0][1]=y;
+        }
+     }
+     console.log(board);
+     return possiblePos;
+  }
+
+  function getAllDiagonalMovesFarao(board, from_x, from_y){
+    let possiblePos = Array.from({length: 4},()=> Array.from({length: 2}, () => null))
+    return possiblePos;
+  }
+
+  function getAllDiagonalMoves(board, from_x, from_y){
+   
+    const piece = board[from_y][from_x];
+    if (piece===WB || piece===BB) 
+      return getAllDiagonalMovesBeetle(board, from_x, from_y);
+
+    if (piece===WF || piece===BF) 
+      return getAllDiagonalMovesFarao(board, from_x, from_y);
+  }
+
+  function isLegalMove(board, from_x, from_y, to_x, to_y){
+    const possiblePos = getAllDiagonalMoves(board, from_x, from_y);
+    console.log(possiblePos);
+
+    if(possiblePos.includes({to_x, to_y})) return false;
+
+    return true; 
+  }
 
   function init_board(size) {
     let board = Array.from({length: size},()=> Array.from({length: size}, () => 0));
@@ -33,23 +73,36 @@ function App() {
         }
       }
     }
+    board[Math.floor(n/2)][Math.floor(n/2)] = -1;
     setBoard(board);
   }
 
   function dragStart(e){
-      console.log("drag start");
-      setFromPos(e.target);
-      console.log(fromPos)
+    const from_x = parseInt(e.target.getAttribute("pos_j"));
+    const from_y = parseInt(e.target.getAttribute("pos_i"));      
+    
+    if (!board[from_y][from_x] >0 ) return;
+
+    setFromPos(e.target);
   }
 
   function dragDrop(e){
-      console.log("drag drop");
+      const from_x = parseInt(fromPos.getAttribute("pos_j"));
+      const from_y = parseInt(fromPos.getAttribute("pos_i"));
+      const to_x = parseInt(e.target.getAttribute("pos_j"));
+      const to_y =  parseInt(e.target.getAttribute("pos_i"));
+
+      if (!isLegalMove(board, from_x, from_y, to_x, to_y)){ 
+        setLegalMove(false); 
+        return;
+      }
       setToPos(e.target);
-      console.log(toPos);
+      
+      setLegalMove(true);
   }
 
   function dragEnd(e){
-      console.log("drag end");
+    if (!legalMove) return;
       const is = fromPos.getAttribute("pos_i");
       const js = fromPos.getAttribute("pos_j");
       const it = toPos.getAttribute("pos_i");
@@ -59,7 +112,6 @@ function App() {
       board[is][js]=0;
       board[it][jt]=t;
 
-      console.log(board);
       setBoard([...board]);
   }
 
