@@ -10,7 +10,7 @@ function renderImages(board, size, dragStart, dragDrop, dragEnd){
                 key={i+","+j} 
                 src={"images/"+board[i][j]+".png"} 
                 alt={board[i][j]}
-                draggable={true}
+                draggable={board[i][j]<=0?false:true}
                 onDragStart={dragStart}
                 onDragOver={(e) => e.preventDefault()}
                 onDragEnter={(e) => e.preventDefault()}

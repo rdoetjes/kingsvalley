@@ -18,17 +18,42 @@ function App() {
   function getAllDiagonalMovesBeetle(board, from_x, from_y){
     let possiblePos = Array.from({length: 4},()=> Array.from({length: 2}, () => null))
 
-    console.log(from_x, from_y);
+    console.log("coming from: ", board[from_y][from_x], from_x, from_y);
      //diagonal down right
      for (let x = from_x, y = from_y; x >=0 && y < n; x--, y++){
         if (from_x!==x && from_y!==y && board[y][x]===0){
-          console.log(x, y);
           possiblePos[0][0]=x;
           possiblePos[0][1]=y;
         }
      }
-     console.log(board);
-     return possiblePos;
+
+     //diagonal up right
+     for (let x = from_x, y = from_y; x < n && y >= 0; x++, y--){
+      if (from_x!==x && from_y!==y && board[y][x]===0){
+        possiblePos[1][0]=x;
+        possiblePos[1][1]=y;
+      }
+   }
+
+     //diagonal down left
+     for (let x = from_x, y = from_y; x < n && y < n; x++, y++){
+      if (from_x!==x && from_y!==y && board[y][x]===0){
+        possiblePos[2][0]=x;
+        possiblePos[2][1]=y;
+      }
+   }
+
+    //diagonal down right
+    for (let x = from_x, y = from_y; x >=0 && y >= 0; x--, y--){
+      if (from_x!==x && from_y!==y && board[y][x]===0){
+        console.log(x, y);
+        possiblePos[3][0]=x;
+        possiblePos[3][1]=y;
+      }
+    }
+
+    console.log(board);
+    return possiblePos;
   }
 
   function getAllDiagonalMovesFarao(board, from_x, from_y){
