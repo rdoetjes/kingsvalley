@@ -102,12 +102,7 @@ function App() {
     setBoard(board);
   }
 
-  function dragStart(e){
-    const from_x = parseInt(e.target.getAttribute("pos_j"));
-    const from_y = parseInt(e.target.getAttribute("pos_i"));      
-    
-    if (!board[from_y][from_x] >0 ) return;
-
+  function dragStart(e){    
     setFromPos(e.target);
   }
 
