@@ -15,100 +15,166 @@ function App() {
   const [toPos, setToPos] = useState(null);
   const [legalMove, setLegalMove] = useState(false);
   
-  function getAllMovesBeetle(board, from_x, from_y){
+  function getAllMovesPiece(board, from_x, from_y){
     let possiblePos = Array.from({length: 8},()=> Array.from({length: 2}, () => null))
 
     console.log("coming from: ", board[from_y][from_x], from_x, from_y);
+
      //diagonal down right
+     let obstacle = false;
      for (let x = from_x, y = from_y; x >=0 && y < n; x--, y++){
-        if (from_x!==x && from_y!==y && board[y][x]===0){
+        if (from_x!==x && from_y!==y && board[y][x]!==0){
+          possiblePos[0][0]=x+1;
+          possiblePos[0][1]=y-1;
+          obstacle = true;
+          break;
+        }
+        if (!obstacle && from_x!==x && from_y!==y){
           possiblePos[0][0]=x;
           possiblePos[0][1]=y;
         }
      }
 
-     //diagonal up right
-     for (let x = from_x, y = from_y; x < n && y >= 0; x++, y--){
-      if (from_x!==x && from_y!==y && board[y][x]===0){
+    //diagonal up right
+    obstacle = false;
+    for (let x = from_x, y = from_y; x < n && y >= 0; x++, y--){
+      if (from_x!==x && from_y!==y && board[y][x]!==0){
+        possiblePos[1][0]=x-1;
+        possiblePos[1][1]=y+1;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_x!==x && from_y!==y){
         possiblePos[1][0]=x;
         possiblePos[1][1]=y;
       }
-   }
+    }
 
-     //diagonal down left
-     for (let x = from_x, y = from_y; x < n && y < n; x++, y++){
-      if (from_x!==x && from_y!==y && board[y][x]===0){
+    //diagonal down left
+    obstacle = false;
+    for (let x = from_x, y = from_y; x < n && y < n; x++, y++){
+      if (from_x!==x && from_y!==y && board[y][x]!==0){
+        possiblePos[2][0]=x-1;
+        possiblePos[2][1]=y-1;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_x!==x && from_y!==y){
         possiblePos[2][0]=x;
         possiblePos[2][1]=y;
       }
-   }
+    }
 
     //diagonal down right
+    obstacle = false;
     for (let x = from_x, y = from_y; x >=0 && y >= 0; x--, y--){
-      if (from_x!==x && from_y!==y && board[y][x]===0){
+      if (from_x!==x && from_y!==y && board[y][x]!==0){
+        possiblePos[3][0]=x+1;
+        possiblePos[3][1]=y+1;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_x!==x && from_y!==y){
         possiblePos[3][0]=x;
         possiblePos[3][1]=y;
       }
     }
 
     //check horizontal right
+    obstacle = false
     for(let x = from_x, y = from_y; x<n; x++){
-      console.log(x);
-      if (from_x!==x && board[y][x]===0){
+      if (from_x!==x && board[y][x]!==0){
+        possiblePos[4][0]=x-1;
+        possiblePos[4][1]=y;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_x!==x){
         possiblePos[4][0]=x;
         possiblePos[4][1]=y;
       }
     }
 
     //check horizontal left
+    obstacle = false;
     for(let x = from_x, y = from_y; x>=0; x--){
-      console.log(x);
-      if (from_x!==x && board[y][x]===0){
+      if (from_x!==x && board[y][x]!==0){
+        possiblePos[5][0]=x+1;
+        possiblePos[5][1]=y;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_x!==x){
         possiblePos[5][0]=x;
         possiblePos[5][1]=y;
       }
     }
 
     //check vertical up
+    obstacle = false;
     for(let x = from_x, y = from_y; y>=0; y--){
-      if (from_y!==y && board[y][x]===0){
+      if (from_y!==y && board[y][x]!==0){
+        possiblePos[6][0]=x;
+        possiblePos[6][1]=y+1;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_y!==y){
         possiblePos[6][0]=x;
         possiblePos[6][1]=y;
       }
     }
 
     //check vertical down
+    obstacle = false;
     for(let x = from_x, y = from_y; y<n; y++){
-      if (from_y!==y && board[y][x]===0){
+      if (from_y!==y && board[y][x]!==0){
+        possiblePos[7][0]=x;
+        possiblePos[7][1]=y-1;
+        obstacle = true;
+        break;
+      }
+      if (!obstacle && from_y!==y){
         possiblePos[7][0]=x;
         possiblePos[7][1]=y;
       }
     }
-
     console.log(possiblePos);
     return possiblePos;
   }
 
-  function getAllMovesFarao(board, from_x, from_y){
-    let possiblePos = Array.from({length: 4},()=> Array.from({length: 2}, () => null))
+  function pruneCenterSquareAsLegalMove(possiblePos){
+    console.log(possiblePos);
+    for(let i=0; i<=possiblePos.length-1; i++){
+      console.log(i);
+      if ( possiblePos[i][0] === Math.floor(n/2) &&  (possiblePos[i][1] === Math.floor(n/2)) ){
+        possiblePos[i][0] = null;
+        possiblePos[i][1] = null;
+      }
+    }
     return possiblePos;
   }
 
   function getAllMovesForSelectedPiece(board, from_x, from_y){
     const piece = board[from_y][from_x];
+    let moves = getAllMovesPiece(board, from_x, from_y);
 
-    if (piece===WB || piece===BB) 
-      return getAllMovesBeetle(board, from_x, from_y);
+    if (piece===WB || piece===BB){
+      return pruneCenterSquareAsLegalMove(moves);
+    }
 
     if (piece===WF || piece===BF) 
-      return getAllMovesFarao(board, from_x, from_y);
+      return moves;
   }
 
   function isLegalMove(board, from_x, from_y, to_x, to_y){
     let possiblePos = getAllMovesForSelectedPiece(board, from_x, from_y);
     
     for(let i=0; i < possiblePos.length; i++)
-      if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) return true;
+      if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) {
+        console.log("legal move");
+        return true;
+      }
 
     return false;
   }
@@ -131,7 +197,7 @@ function App() {
         }
       }
     }
-    board[Math.floor(n/2)][Math.floor(n/2)] = -1;
+    //board[Math.floor(n/2)][Math.floor(n/2)] = -1;
     setBoard(board);
   }
 
