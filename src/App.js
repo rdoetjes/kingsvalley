@@ -15,8 +15,8 @@ function App() {
   const [toPos, setToPos] = useState(null);
   const [legalMove, setLegalMove] = useState(false);
   
-  function getAllDiagonalMovesBeetle(board, from_x, from_y){
-    let possiblePos = Array.from({length: 4},()=> Array.from({length: 2}, () => null))
+  function getAllMovesBeetle(board, from_x, from_y){
+    let possiblePos = Array.from({length: 8},()=> Array.from({length: 2}, () => null))
 
     console.log("coming from: ", board[from_y][from_x], from_x, from_y);
      //diagonal down right
@@ -46,38 +46,71 @@ function App() {
     //diagonal down right
     for (let x = from_x, y = from_y; x >=0 && y >= 0; x--, y--){
       if (from_x!==x && from_y!==y && board[y][x]===0){
-        console.log(x, y);
         possiblePos[3][0]=x;
         possiblePos[3][1]=y;
       }
     }
 
-    console.log(board);
+    //check horizontal right
+    for(let x = from_x, y = from_y; x<n; x++){
+      console.log(x);
+      if (from_x!==x && board[y][x]===0){
+        possiblePos[4][0]=x;
+        possiblePos[4][1]=y;
+      }
+    }
+
+    //check horizontal left
+    for(let x = from_x, y = from_y; x>=0; x--){
+      console.log(x);
+      if (from_x!==x && board[y][x]===0){
+        possiblePos[5][0]=x;
+        possiblePos[5][1]=y;
+      }
+    }
+
+    //check vertical up
+    for(let x = from_x, y = from_y; y>=0; y--){
+      if (from_y!==y && board[y][x]===0){
+        possiblePos[6][0]=x;
+        possiblePos[6][1]=y;
+      }
+    }
+
+    //check vertical down
+    for(let x = from_x, y = from_y; y<n; y++){
+      if (from_y!==y && board[y][x]===0){
+        possiblePos[7][0]=x;
+        possiblePos[7][1]=y;
+      }
+    }
+
+    console.log(possiblePos);
     return possiblePos;
   }
 
-  function getAllDiagonalMovesFarao(board, from_x, from_y){
+  function getAllMovesFarao(board, from_x, from_y){
     let possiblePos = Array.from({length: 4},()=> Array.from({length: 2}, () => null))
     return possiblePos;
   }
 
-  function getAllDiagonalMoves(board, from_x, from_y){
-   
+  function getAllMovesForSelectedPiece(board, from_x, from_y){
     const piece = board[from_y][from_x];
+
     if (piece===WB || piece===BB) 
-      return getAllDiagonalMovesBeetle(board, from_x, from_y);
+      return getAllMovesBeetle(board, from_x, from_y);
 
     if (piece===WF || piece===BF) 
-      return getAllDiagonalMovesFarao(board, from_x, from_y);
+      return getAllMovesFarao(board, from_x, from_y);
   }
 
   function isLegalMove(board, from_x, from_y, to_x, to_y){
-    const possiblePos = getAllDiagonalMoves(board, from_x, from_y);
-    console.log(possiblePos);
+    let possiblePos = getAllMovesForSelectedPiece(board, from_x, from_y);
+    
+    for(let i=0; i < possiblePos.length; i++)
+      if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) return true;
 
-    if(possiblePos.includes({to_x, to_y})) return false;
-
-    return true; 
+    return false;
   }
 
   function init_board(size) {
