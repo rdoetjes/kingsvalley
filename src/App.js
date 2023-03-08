@@ -8,9 +8,9 @@ const WB=3;
 const WF=4;
 
 function App() {
-  const n = 5;
+  const N = 5;
   
-  const [board, setBoard] = useState(Array.from({length: n},()=> Array.from({length: n}, () => 0)));
+  const [board, setBoard] = useState(Array.from({length: N},()=> Array.from({length: N}, () => 0)));
   const [fromPos, setFromPos] = useState(null);
   const [toPos, setToPos] = useState(null);
   const [legalMove, setLegalMove] = useState(false);
@@ -21,7 +21,7 @@ function App() {
     //TODO: refector into loose methods
      //diagonal down right
      let obstacle = false;
-     for (let x = from_x, y = from_y; x >=0 && y < n; x--, y++){
+     for (let x = from_x, y = from_y; x >=0 && y < N; x--, y++){
         if (from_x!==x && from_y!==y && board[y][x]!==0){
           possiblePos[0][0]=x+1;
           possiblePos[0][1]=y-1;
@@ -36,7 +36,7 @@ function App() {
 
     //diagonal up right
     obstacle = false;
-    for (let x = from_x, y = from_y; x < n && y >= 0; x++, y--){
+    for (let x = from_x, y = from_y; x < N && y >= 0; x++, y--){
       if (from_x!==x && from_y!==y && board[y][x]!==0){
         possiblePos[1][0]=x-1;
         possiblePos[1][1]=y+1;
@@ -51,7 +51,7 @@ function App() {
 
     //diagonal down left
     obstacle = false;
-    for (let x = from_x, y = from_y; x < n && y < n; x++, y++){
+    for (let x = from_x, y = from_y; x < N && y < N; x++, y++){
       if (from_x!==x && from_y!==y && board[y][x]!==0){
         possiblePos[2][0]=x-1;
         possiblePos[2][1]=y-1;
@@ -81,7 +81,7 @@ function App() {
 
     //check horizontal right
     obstacle = false
-    for(let x = from_x, y = from_y; x<n; x++){
+    for(let x = from_x, y = from_y; x<N; x++){
       if (from_x!==x && board[y][x]!==0){
         console.log(x, y, board[y][x]);
         possiblePos[4][0]=x-1;
@@ -127,7 +127,7 @@ function App() {
 
     //check vertical down
     obstacle = false;
-    for(let x = from_x, y = from_y; y<n; y++){
+    for(let x = from_x, y = from_y; y<N; y++){
       if (from_y!==y && board[y][x]!==0){
         possiblePos[7][0]=x;
         possiblePos[7][1]=y-1;
@@ -155,7 +155,7 @@ function App() {
 
   function pruneCenterSquareAsLegalMove(possiblePos){
     for(let i=0; i<=possiblePos.length-1; i++){
-      if ( possiblePos[i][0] === Math.floor(n/2) &&  (possiblePos[i][1] === Math.floor(n/2)) ){
+      if ( possiblePos[i][0] === Math.floor(N/2) &&  (possiblePos[i][1] === Math.floor(N/2)) ){
         possiblePos[i][0] = null;
         possiblePos[i][1] = null;
       }
@@ -252,7 +252,7 @@ function App() {
   }
 
   function restartGame(){
-    initBoard(n);
+    initBoard(N);
   }
 
   function playerColor(player){
@@ -260,13 +260,13 @@ function App() {
   }
 
   useEffect(() => {
-    initBoard(n);
+    initBoard(N);
   }, []);
 
   return (
       <div className='center'>
         <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)}
-        <Board board={board} size={n} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
+        <Board board={board} size={N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
         <button onClick={restartGame}>RESTART</button>
       </div>
     </div>
