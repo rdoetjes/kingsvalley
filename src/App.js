@@ -175,9 +175,8 @@ function App() {
     return moves;
   }
 
-  function isLegalMove(player, board, from_x, from_y, to_x, to_y){
+  function didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y){
     const piece = board[from_y][from_x];
-    console.log("player:", player, board, "x", from_x, "y", from_y, "piece", piece); 
 
     if (player === 0 && !(piece===WB || piece===WF))
       return false;
@@ -229,7 +228,7 @@ function App() {
       const to_x = parseInt(e.target.getAttribute("pos_j"));
       const to_y =  parseInt(e.target.getAttribute("pos_i"));
 
-      if (!isLegalMove(player, board, from_x, from_y, to_x, to_y)){ 
+      if (!didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y)){ 
         setLegalMove(false); 
         return;
       }
