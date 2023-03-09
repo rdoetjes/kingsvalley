@@ -5,9 +5,21 @@ export default class GameLogic {
     WB = 3;
     WF = 4;
     N = 5;
+    WHITE = 0;
+    BLACK = 1;
 
     GameLogic() {
 
+    }
+
+    checkForWinner(board){
+        if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.WF) 
+            return this.WHITE;
+
+        if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.BF) 
+            return this.BLACK
+        
+        return -1;
     }
 
     getAllMovesPiece(board, from_x, from_y) {

@@ -10,6 +10,8 @@ function App() {
   const [toPos, setToPos] = useState(null);
   const [legalMove, setLegalMove] = useState(false);
   const [player, setPlayer] = useState(0);
+  const [disable, setDisable] = useState(false);
+  const [winnerMessage, setWinnerMessage] = useState('');
 
   function dragStart(e) {
     setFromPos(e.target);
@@ -43,15 +45,24 @@ function App() {
     board[it][jt] = t;
 
     setBoard([...board]);
+
+    const winner = gameLogic.checkForWinner(board);
+    if (winner!==-1){
+      setWinnerMessage(" WINS!")
+      setPlayer(winner);
+      setDisable(true);
+    }
   }
 
   function restartGame() {
+    setWinnerMessage('');
+    setDisable(false);
     setBoard(gameLogic.initBoard(gameLogic.N));
     setPlayer(0);
   }
 
   function playerColor(player) {
-    return player === 0 ? "WHITE" : "BLACK";
+    return player === gameLogic.WHITE ? "WHITE" : "BLACK";
   }
 
   useEffect(() => {
@@ -61,8 +72,8 @@ function App() {
 
   return (
     <div className='center'>
-      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)}
-        <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
+      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage} <div/>
+        <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
         <button onClick={restartGame}>RESTART</button>
       </div>
     </div>
