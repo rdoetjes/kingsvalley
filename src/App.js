@@ -47,6 +47,7 @@ function App() {
 
   function restartGame() {
     setBoard(gameLogic.initBoard(gameLogic.N));
+    setPlayer(0);
   }
 
   function playerColor(player) {
