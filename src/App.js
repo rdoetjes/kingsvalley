@@ -4,15 +4,12 @@ import GameLogic from "./GameLogic.js"
 import './App.css';
 
 function App() {
-  const N = 5;
   const [gameLogic] = useState(new GameLogic());
-  const [board, setBoard] = useState(Array.from({ length: N }, () => Array.from({ length: N }, () => 0)));
+  const [board, setBoard] = useState(Array.from({ length: gameLogic.N }, () => Array.from({ length: gameLogic.N }, () => 0)));
   const [fromPos, setFromPos] = useState(null);
   const [toPos, setToPos] = useState(null);
   const [legalMove, setLegalMove] = useState(false);
   const [player, setPlayer] = useState(0);
-
-
 
   function dragStart(e) {
     setFromPos(e.target);
@@ -49,7 +46,7 @@ function App() {
   }
 
   function restartGame() {
-    setBoard(gameLogic.initBoard(N));
+    setBoard(gameLogic.initBoard(gameLogic.N));
   }
 
   function playerColor(player) {
@@ -57,14 +54,14 @@ function App() {
   }
 
   useEffect(() => {
-    setBoard(gameLogic.initBoard(N));
+    setBoard(gameLogic.initBoard(gameLogic.N));
     setPlayer(0);
   }, [gameLogic]);
 
   return (
     <div className='center'>
       <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)}
-        <Board board={board} size={N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
+        <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} />
         <button onClick={restartGame}>RESTART</button>
       </div>
     </div>
