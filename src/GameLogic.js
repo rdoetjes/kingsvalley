@@ -16,7 +16,7 @@ export default class GameLogic {
         if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.WF) 
             return this.WHITE;
 
-        if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.BF) 
+        if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.BF)
             return this.BLACK
         
         return -1;
