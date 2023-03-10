@@ -122,10 +122,7 @@ export default class GameLogic {
     
     #shortCutWinner(moves){
         for(let i=0; i<moves.length-1; i++){
-            if (moves[i][3] === 2 && moves[i][2] === 2) {
-                console.log("KILL MOVE");
-                return moves[i];
-            }
+            if (moves[i][3] === 2 && moves[i][2] === 2) return moves[i];
         }
         return null;
     }
@@ -148,7 +145,6 @@ export default class GameLogic {
             const game_over = this.#shortCutWinner(moves);
             if (game_over){
                 bestMove = {from_x: game_over[0], from_y: game_over[1], to_x: game_over[2], to_y: game_over[3]};
-                console.log(bestMove);
                 break;
             }
 
