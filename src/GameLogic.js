@@ -25,8 +25,8 @@ export default class GameLogic {
     initBoard(invertedFaroa) {
         let board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
  
-        const blackPieces = [this.BB, this.BB, this.WF, this.BB, this.BB];
-        const whitePieces = [this.WB, this.WB, this.BF, this.WB, this.WB];
+        const blackPieces = [this.BB, this.BB, this.BF, this.BB, this.BB];
+        const whitePieces = [this.WB, this.WB, this.WF, this.WB, this.WB];
        
 
         for (let i = 0; i < this.N; i++) {
