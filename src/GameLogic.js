@@ -63,19 +63,30 @@ export default class GameLogic {
         return false;
     }
 
+    ai(board, player){
+        this.getAllValidMovesForAllPieces(board, player)
+    }
+
     getAllValidMovesForAllPieces(board, player){
         let allMoves = [];
-            for(let i=0; i<this.N; i++){
-                for(let j=0; i<this.N; j++){
-                    if (player===this.BLACK){
-                         if (board[i][j] === 1 || board[i][j] === 2){
-                            allMoves.push(this.#getAllValidMovesForSelectedPiece(board, j, i));
-                         }else{
-                            allMoves.push(this.#getAllValidMovesForSelectedPiece(board, j, i));
-                         }
+        for(let i=0; i<this.N; i++){
+            for(let j=0; j<this.N; j++){
+                if (player===this.BLACK){
+                    if (board[i][j] === 1 || board[i][j] === 2){
+                        this.#getAllValidMovesForSelectedPiece(board, j, i).forEach(element => { 
+                                if(element[0]!==null) allMoves.push(element);
+                        });
                     }
                 }
+                if (player===this.WHITE){
+                    if (board[i][j] === 3 || board[i][j] === 4){
+                        this.#getAllValidMovesForSelectedPiece(board, j, i).forEach(element => { 
+                            if(element[0]!==null) allMoves.push(element);
+                    });                    }
+                }
             }
+        }
+        console.log(allMoves);
     }
 
     #getAllMovesPiece(board, from_x, from_y) {

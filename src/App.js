@@ -29,7 +29,6 @@ function App() {
     }
     setPlayer(player ^ 1);
     setToPos(e.target);
-
     setLegalMove(true);
   }
 
@@ -47,10 +46,15 @@ function App() {
     setBoard([...board]);
 
     const winner = gameLogic.checkForWinner(board);
-    if (winner!==-1){
+    if (winner !== -1) {
       setWinnerMessage(" WINS!")
       setPlayer(winner);
       setDisable(true);
+      return;
+    }
+    
+    if (player===gameLogic.BLACK){
+      gameLogic.ai(board, player);
     }
   }
 
@@ -72,7 +76,7 @@ function App() {
 
   return (
     <div className='center'>
-      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage} <div/>
+      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage} <div />
         <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
         <button onClick={restartGame}>RESTART</button>
       </div>
