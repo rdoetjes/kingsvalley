@@ -62,54 +62,54 @@ export default class GameLogic {
         return false;
     }
 
-    #movePiece(ai_board, from_x, from_y, to_x, to_y){
+    #movePiece(ai_board, from_x, from_y, to_x, to_y) {
         ai_board[to_y][to_x] = ai_board[from_y][from_x];
         ai_board[from_y][from_x] = 0;
     }
 
     #minimax(ai_board, maximizingplayer, depth) {
         let score = this.checkForWinner(ai_board);
-        if (depth <= 0 || score !== -1) {
+        if (depth <= 0 || score === 1) {
             if (score === 1) return Infinity;
             return score;
         }
-            
-        if(maximizingplayer === 1){
+
+        if (maximizingplayer === 1) {
             let bestScore = -Infinity;
             let moves = this.getAllValidMovesPlayerPieces(ai_board, this.BLACK);
-            for(let i=0; i<moves.length-1; i++){
+            for (let i = 0; i < moves.length - 1; i++) {
                 const from_x = moves[i][0];
                 const from_y = moves[i][1];
                 const to_x = moves[i][2];
                 const to_y = moves[i][3];
-               
+
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
-                score = this.#minimax(ai_board, 0, depth - 1);   
-                if(score===1) {return Infinity;}
-                this.#movePiece(ai_board, to_x, to_y, from_x, from_y);         
-                bestScore = Math.max(score,bestScore);
+                score = this.#minimax(ai_board, 0, depth - 1);
+                if (score === 1) { return Infinity; }
+                this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
+                bestScore = Math.max(score, bestScore);
             }
             return bestScore;
-        } else{
+        } else {
             let bestScore = Infinity;
             let moves = this.getAllValidMovesPlayerPieces(ai_board, this.WHITE);
-            for(let i=0; i<moves.length-1; i++){
+            for (let i = 0; i < moves.length - 1; i++) {
                 const from_x = moves[i][0];
                 const from_y = moves[i][1];
                 const to_x = moves[i][2];
                 const to_y = moves[i][3];
-               
+
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
-                score = this.#minimax(ai_board, 1, depth - 1);  
-                if(score===0) {score = -1*Math.random()*10000;}
-                this.#movePiece(ai_board, to_x, to_y, from_x, from_y);                
-                bestScore = Math.min(score, bestScore);     
+                score = this.#minimax(ai_board, 1, depth - 1);
+                if (score === 0) { score = -1 * Math.random() * 10000; }
+                this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
+                bestScore = Math.min(score, bestScore);
             }
             return bestScore;
         }
     }
 
-    #copyBoard(sBoard){
+    #copyBoard(sBoard) {
         let dBoard = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
         //make deep copy for each new move (nice and clean)
         for (let i = 0; i < this.N; i++) {
@@ -125,27 +125,25 @@ export default class GameLogic {
         let bestMove;
 
         let moves = this.getAllValidMovesPlayerPieces(board, this.BLACK);
-        for(let i=0; i<moves.length-1; i++){
+        for (let i = 0; i < moves.length - 1; i++) {
             const from_x = moves[i][0];
             const from_y = moves[i][1];
             const to_x = moves[i][2];
             const to_y = moves[i][3];
 
             //make deep copy for each new move (nice and clean)
-           let ai_board = this.#copyBoard(board);
-            
-            this.#movePiece(ai_board, from_x, from_y, to_x, to_y);     
-            let score = this.#minimax(ai_board, 0, depth);
-            this.#movePiece(ai_board, to_x, to_y,  from_x, from_y);     
+            let ai_board = this.#copyBoard(board);
 
-            if (score>bestScore){
-                bestMove = {from_x, from_y, to_x, to_y};
-                bestScore=score;
+            this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
+            let score = this.#minimax(ai_board, 0, depth);
+            this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
+
+            if (score > bestScore) {
+                bestMove = { from_x, from_y, to_x, to_y };
+                bestScore = score;
             }
         }
         this.#movePiece(board, bestMove.from_x, bestMove.from_y, bestMove.to_x, bestMove.to_y);
-        // board[bestMove.to_y][bestMove.to_x] = board[bestMove.from_y][bestMove.to_x];
-        // board[bestMove.from_y][bestMove.from_x] = 0;
     }
 
     #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {
