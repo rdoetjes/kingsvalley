@@ -70,8 +70,13 @@ export default class GameLogic {
         }
 
         let moves = this.getAllValidMovesForAllPieces(ai_board, maximizingplayer);
-        let a= moves.at(Math.floor(Math.random()*moves.length) + 1);
-        console.log("A", a);    
+        moves.forEach(move => {
+            console.log(moves);
+            if (move[2] === 2 && move[3] === 2) return move;
+        });
+
+        let a = moves.at(Math.floor(Math.random()*moves.length));
+        console.log(a);
         return a;
     }
 
