@@ -62,43 +62,40 @@ export default class GameLogic {
         return false;
     }
 
-    #minimax(ai_board, maximizingplayer, depth){
+    #minimax(ai_board, maximizingplayer, depth) {
         console.log(ai_board);
 
-        if (depth<=0 || this.checkForWinner(ai_board)!==-1){
+        if (depth <= 0 || this.checkForWinner(ai_board) !== -1) {
             return 1;
         }
 
         let moves = this.getAllValidMovesForAllPieces(ai_board, maximizingplayer);
-        moves.forEach(move => {
-            console.log(moves);
-            if (move[2] === 2 && move[3] === 2) return move;
-        });
-
-        let a = moves.at(Math.floor(Math.random()*moves.length));
-        console.log(a);
-        return a;
+        for (let i = 0; i <= moves.length-1; i++){
+            if (moves[i][2] === 2 && moves[i][3] === 2) return moves[i];
+            console.log(moves[i]);
+        }
+        return moves.at(Math.floor(Math.random() * moves.length));
     }
 
     ai(board, maximizingplayer, depth) {
         let ai_board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
-        for(let i=0; i<this.N; i++){
-            for(let j=0; j<this.N; j++){
-                ai_board[i][j]=board[i][j];
+        for (let i = 0; i < this.N; i++) {
+            for (let j = 0; j < this.N; j++) {
+                ai_board[i][j] = board[i][j];
             }
         }
-        
+
         return this.#minimax(board, maximizingplayer, depth);
     }
 
     #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {
-        let record=[4];
+        let record = [4];
         this.#getAllValidMovesForSelectedPiece(board, from_x, from_y).forEach(element => {
-            if (element[0]!==null) {
+            if (element[0] !== null) {
                 record[0] = from_x;
                 record[1] = from_y;
-                record[2]=element[0];
-                record[3]=element[1];
+                record[2] = element[0];
+                record[3] = element[1];
                 allMoves.push([...record]);
             }
         });
@@ -109,13 +106,13 @@ export default class GameLogic {
         for (let from_y = 0; from_y < this.N; from_y++) {
             for (let from_x = 0; from_x < this.N; from_x++) {
                 if (player === this.BLACK) {
-                    if (board[from_y][from_x] === 1 || board[from_y][from_x] === 2) {                       
+                    if (board[from_y][from_x] === 1 || board[from_y][from_x] === 2) {
                         this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);
                     }
                 }
                 if (player === this.WHITE) {
                     if (board[from_x][from_y] === 3 || board[from_x][from_y] === 4) {
-                        this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);                         
+                        this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);
                     }
                 }
             }
