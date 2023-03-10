@@ -61,7 +61,7 @@ function App() {
   function restartGame() {
     setWinnerMessage('');
     setDisable(false);
-    setBoard(gameLogic.initBoard(gameLogic.N));
+    setBoard(gameLogic.initBoard());
     setPlayer(0);
   }
 
@@ -70,7 +70,7 @@ function App() {
   }
 
   useEffect(() => {
-    setBoard(gameLogic.initBoard(gameLogic.N));
+    setBoard(gameLogic.initBoard());
     setPlayer(0);
   }, [gameLogic]);
 
