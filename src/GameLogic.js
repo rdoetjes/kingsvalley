@@ -143,9 +143,9 @@ export default class GameLogic {
                 bestScore=score;
             }
         }
-        
-        board[bestMove.to_y][bestMove.to_x] = board[bestMove.from_y][bestMove.from_x];
-        board[bestMove.from_y][bestMove.from_x] = 0;
+        this.#movePiece(board, bestMove.from_x, bestMove.from_y, bestMove.to_x, bestMove.to_y);
+        // board[bestMove.to_y][bestMove.to_x] = board[bestMove.from_y][bestMove.to_x];
+        // board[bestMove.from_y][bestMove.from_x] = 0;
     }
 
     #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {
