@@ -51,7 +51,7 @@ function App() {
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, 5);
+      gameLogic.ai(board, 4);
       setBoard([...board]);
       if (checkForWinner(board)) return true;
     }
