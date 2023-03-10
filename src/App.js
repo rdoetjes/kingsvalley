@@ -11,8 +11,6 @@ function App() {
   const [disable, setDisable] = useState(false);
   const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
-  const [thinkCount, setThinkCount] = useState(0);
-
 
   function dragStart(e) {
     setLegalmove(false);
