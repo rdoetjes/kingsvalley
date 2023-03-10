@@ -53,7 +53,6 @@ export default class GameLogic {
             return false;
 
         let possiblePos = this.#getAllValidMovesForSelectedPiece(board, from_x, from_y);
-        console.log(possiblePos);
 
         for (let i = 0; i < possiblePos.length; i++)
             if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) {
@@ -63,31 +62,34 @@ export default class GameLogic {
         return false;
     }
 
-    #minimax(board, player, depth){
-        if (depth<=0 || this.checkForWinner(board)){
-            return;
+    #minimax(ai_board, maximizingplayer, depth){
+        console.log(ai_board);
+
+        if (depth<=0 || this.checkForWinner(ai_board)!==-1){
+            return 1;
         }
 
-        depth--;
-        this.getAllValidMovesForAllPieces(board, player).forEach(move => {
-            const piece = board[move[1]][move[0]];
-            board[move[1]][move[0]]=0;
-            board[move[3]][move[2]]=piece;
-//todo
-            this.#minimax(board, player, depth);
-        })
+        let moves = this.getAllValidMovesForAllPieces(ai_board, maximizingplayer);
+        let a= moves.at(Math.floor(Math.random()*moves.length) + 1);
+        console.log("A", a);    
+        return a;
     }
 
-    ai(board, player, depth) {
-        let ai_board = [...board];
-        this.minimax(ai_board, player, depth)
+    ai(board, maximizingplayer, depth) {
+        let ai_board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
+        for(let i=0; i<this.N; i++){
+            for(let j=0; j<this.N; j++){
+                ai_board[i][j]=board[i][j];
+            }
+        }
+        
+        return this.#minimax(board, maximizingplayer, depth);
     }
 
     #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {
         let record=[4];
         this.#getAllValidMovesForSelectedPiece(board, from_x, from_y).forEach(element => {
             if (element[0]!==null) {
-                console.log(element[0]);
                 record[0] = from_x;
                 record[1] = from_y;
                 record[2]=element[0];
