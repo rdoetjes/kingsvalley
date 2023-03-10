@@ -22,7 +22,22 @@ export default class GameLogic {
         return -1;
     }
 
-    getAllMovesPiece(board, from_x, from_y) {
+    getAllValidMovesForAllPieces(board, player){
+        let allMoves = [];
+            for(let i=0; i<this.N; i++){
+                for(let j=0; i<this.N; j++){
+                    if (player===this.BLACK){
+                         if (board[i][j] === 1 || board[i][j] === 2){
+                            allMoves.push(this.#getAllValidMovesForSelectedPiece(board, j, i));
+                         }else{
+                            allMoves.push(this.#getAllValidMovesForSelectedPiece(board, j, i));
+                         }
+                    }
+                }
+            }
+    }
+
+    #getAllMovesPiece(board, from_x, from_y) {
         let possiblePos = Array.from({ length: 8 }, () => Array.from({ length: 2 }, () => null))
         //TODO: refector into loose methods
         //diagonal down right
@@ -149,7 +164,7 @@ export default class GameLogic {
         return possiblePos;
     }
 
-    pruneOwnLocation(possiblePos, from_x, from_y) {
+    #pruneOwnLocation(possiblePos, from_x, from_y) {
         for (let i = 0; i <= possiblePos.length - 1; i++) {
             if (possiblePos[i][0] === from_x && possiblePos[i][1] === from_y) {
                 possiblePos[i][0] = null;
@@ -159,7 +174,7 @@ export default class GameLogic {
         return possiblePos;
     }
 
-    pruneCenterSquareAsLegalMove(possiblePos) {
+    #pruneCenterSquareAsLegalMove(possiblePos) {
         for (let i = 0; i <= possiblePos.length - 1; i++) {
             if (possiblePos[i][0] === Math.floor(this.N / 2) && (possiblePos[i][1] === Math.floor(this.N / 2))) {
                 possiblePos[i][0] = null;
@@ -169,14 +184,14 @@ export default class GameLogic {
         return possiblePos;
     }
 
-    getAllValidMovesForSelectedPiece(board, from_x, from_y) {
+    #getAllValidMovesForSelectedPiece(board, from_x, from_y) {
         const piece = board[from_y][from_x];
 
-        let moves = this.getAllMovesPiece(board, from_x, from_y);
-        moves = this.pruneOwnLocation(moves, from_x, from_y);
+        let moves = this.#getAllMovesPiece(board, from_x, from_y);
+        moves = this.#pruneOwnLocation(moves, from_x, from_y);
 
         if (piece === this.WB || piece === this.BB)
-            return this.pruneCenterSquareAsLegalMove(moves);
+            return this.#pruneCenterSquareAsLegalMove(moves);
 
         return moves;
     }
@@ -211,7 +226,7 @@ export default class GameLogic {
         if (player === 1 && !(piece === this.BB || piece === this.BF))
             return false;
 
-        let possiblePos = this.getAllValidMovesForSelectedPiece(board, from_x, from_y);
+        let possiblePos = this.#getAllValidMovesForSelectedPiece(board, from_x, from_y);
         console.log(possiblePos);
 
         for (let i = 0; i < possiblePos.length; i++)
