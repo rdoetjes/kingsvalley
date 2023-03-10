@@ -18,6 +18,7 @@ function App() {
   }
 
   function dragDrop(e) {
+    console.log("drop end");
     const from_x = parseInt(fromPos.getAttribute("pos_j"));
     const from_y = parseInt(fromPos.getAttribute("pos_i"));
     const to_x = parseInt(e.target.getAttribute("pos_j"));
@@ -54,7 +55,12 @@ function App() {
     }
     
     if (player===gameLogic.BLACK){
-      gameLogic.ai(board, player, 2);
+      let move = gameLogic.ai(board, player, 3);
+      console.log(move);
+      const piece = board[move[1]][move[0]];
+      board[move[3]][move[2]] = piece;  
+      board[move[1]][move[0]] = 0;
+      setPlayer(player^1);  
     }
   }
 
