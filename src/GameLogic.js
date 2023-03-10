@@ -22,6 +22,47 @@ export default class GameLogic {
         return -1;
     }
 
+    initBoard() {
+        let board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
+        const blackPieces = [this.BB, this.BB, this.BF, this.BB, this.BB];
+        const whitePieces = [this.WB, this.WB, this.WF, this.WB, this.WB];
+
+        for (let i = 0; i < this.N; i++) {
+            for (let j = 0; j < this.N; j++) {
+                if (i === 0) {
+                    board[i][j] = blackPieces[j];
+                    continue;
+                }
+
+                if (i === 4) {
+                    board[i][j] = whitePieces[j];
+                    continue;
+                }
+            }
+        }
+        return board;
+    }
+
+    didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y) {
+        const piece = board[from_y][from_x];
+
+        if (player === 0 && !(piece === this.WB || piece === this.WF))
+            return false;
+
+        if (player === 1 && !(piece === this.BB || piece === this.BF))
+            return false;
+
+        let possiblePos = this.#getAllValidMovesForSelectedPiece(board, from_x, from_y);
+        console.log(possiblePos);
+
+        for (let i = 0; i < possiblePos.length; i++)
+            if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) {
+                return true;
+            }
+
+        return false;
+    }
+
     getAllValidMovesForAllPieces(board, player){
         let allMoves = [];
             for(let i=0; i<this.N; i++){
@@ -196,44 +237,4 @@ export default class GameLogic {
         return moves;
     }
 
-    initBoard() {
-        let board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
-        const blackPieces = [this.BB, this.BB, this.BF, this.BB, this.BB];
-        const whitePieces = [this.WB, this.WB, this.WF, this.WB, this.WB];
-
-        for (let i = 0; i < this.N; i++) {
-            for (let j = 0; j < this.N; j++) {
-                if (i === 0) {
-                    board[i][j] = blackPieces[j];
-                    continue;
-                }
-
-                if (i === 4) {
-                    board[i][j] = whitePieces[j];
-                    continue;
-                }
-            }
-        }
-        return board;
-    }
-
-    didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y) {
-        const piece = board[from_y][from_x];
-
-        if (player === 0 && !(piece === this.WB || piece === this.WF))
-            return false;
-
-        if (player === 1 && !(piece === this.BB || piece === this.BF))
-            return false;
-
-        let possiblePos = this.#getAllValidMovesForSelectedPiece(board, from_x, from_y);
-        console.log(possiblePos);
-
-        for (let i = 0; i < possiblePos.length; i++)
-            if (possiblePos[i][0] === to_x && possiblePos[i][1] === to_y) {
-                return true;
-            }
-
-        return false;
-    }
 }
