@@ -12,13 +12,13 @@ export default class GameLogic {
 
     }
 
-    checkForWinner(board){
-        if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.WF) 
+    checkForWinner(board) {
+        if (board[Math.floor(this.N / 2)][Math.floor(this.N / 2)] === this.WF)
             return this.WHITE;
 
-        if (board[Math.floor(this.N/2)][Math.floor(this.N/2)] === this.BF)
+        if (board[Math.floor(this.N / 2)][Math.floor(this.N / 2)] === this.BF)
             return this.BLACK
-        
+
         return -1;
     }
 
@@ -63,30 +63,41 @@ export default class GameLogic {
         return false;
     }
 
-    ai(board, player){
+    ai(board, player) {
         this.getAllValidMovesForAllPieces(board, player)
     }
 
-    getAllValidMovesForAllPieces(board, player){
+    #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {
+        let record=[4];
+        this.#getAllValidMovesForSelectedPiece(board, from_x, from_y).forEach(element => {
+            if (element[0]!==null) {
+                console.log(element[0]);
+                record[0] = from_x;
+                record[1] = from_y;
+                record[2]=element[0];
+                record[3]=element[1];
+                allMoves.push([...record]);
+            }
+        });
+    }
+
+    getAllValidMovesForAllPieces(board, player) {
         let allMoves = [];
-        for(let i=0; i<this.N; i++){
-            for(let j=0; j<this.N; j++){
-                if (player===this.BLACK){
-                    if (board[i][j] === 1 || board[i][j] === 2){
-                        this.#getAllValidMovesForSelectedPiece(board, j, i).forEach(element => { 
-                                if(element[0]!==null) allMoves.push(element);
-                        });
+        for (let from_y = 0; from_y < this.N; from_y++) {
+            for (let from_x = 0; from_x < this.N; from_x++) {
+                if (player === this.BLACK) {
+                    if (board[from_y][from_x] === 1 || board[from_y][from_x] === 2) {                       
+                        this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);
                     }
                 }
-                if (player===this.WHITE){
-                    if (board[i][j] === 3 || board[i][j] === 4){
-                        this.#getAllValidMovesForSelectedPiece(board, j, i).forEach(element => { 
-                            if(element[0]!==null) allMoves.push(element);
-                    });                    }
+                if (player === this.WHITE) {
+                    if (board[from_x][from_y] === 3 || board[from_x][from_y] === 4) {
+                        this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);                         
+                    }
                 }
             }
         }
-        console.log(allMoves);
+        return allMoves;
     }
 
     #getAllMovesPiece(board, from_x, from_y) {
@@ -156,7 +167,6 @@ export default class GameLogic {
         obstacle = false
         for (let x = from_x, y = from_y; x < this.N; x++) {
             if (from_x !== x && board[y][x] !== 0) {
-                console.log(x, y, board[y][x]);
                 possiblePos[4][0] = x - 1;
                 possiblePos[4][1] = y;
                 obstacle = true;
