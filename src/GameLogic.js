@@ -119,6 +119,16 @@ export default class GameLogic {
         }
         return sBoard;
     }
+    
+    #shortCutWinner(moves){
+        for(let i=0; i<moves.length-1; i++){
+            if (moves[i][3] === 2 && moves[i][2] === 2) {
+                console.log("KILL MOVE");
+                return moves[i];
+            }
+        }
+        return null;
+    }
 
     ai(board, depth) {
         let bestScore = -Infinity;
@@ -133,6 +143,14 @@ export default class GameLogic {
 
             //make deep copy for each new move (nice and clean)
             let ai_board = this.#copyBoard(board);
+
+            //check for black farao victory (speeds up game)
+            const game_over = this.#shortCutWinner(moves);
+            if (game_over){
+                bestMove = {from_x: game_over[0], from_y: game_over[1], to_x: game_over[2], to_y: game_over[3]};
+                console.log(bestMove);
+                break;
+            }
 
             this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
             let score = this.#minimax(ai_board, 0, depth);
