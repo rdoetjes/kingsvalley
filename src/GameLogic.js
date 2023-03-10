@@ -70,6 +70,7 @@ export default class GameLogic {
     #minimax(ai_board, maximizingplayer, depth) {
         let score = this.checkForWinner(ai_board);
         if (depth <= 0 || score !== -1) {
+            if (score === 1) return Infinity;
             return score;
         }
             
@@ -84,7 +85,7 @@ export default class GameLogic {
                
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 0, depth - 1);   
-                if(score===1) {score+=100;}
+                if(score===1) {return Infinity;}
                 this.#movePiece(ai_board, to_x, to_y, from_x, from_y);         
                 bestScore = Math.max(score,bestScore);
             }
@@ -100,7 +101,7 @@ export default class GameLogic {
                
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 1, depth - 1);  
-                if(score===0) {score-=100;}
+                if(score===0) {score-=Math.random()*1000;}
                 this.#movePiece(ai_board, to_x, to_y, from_x, from_y);                
                 bestScore = Math.min(score, bestScore);     
             }
@@ -142,7 +143,7 @@ export default class GameLogic {
                 bestScore=score;
             }
         }
-        console.log(bestMove);
+        
         board[bestMove.to_y][bestMove.to_x] = board[bestMove.from_y][bestMove.from_x];
         board[bestMove.from_y][bestMove.from_x] = 0;
     }
