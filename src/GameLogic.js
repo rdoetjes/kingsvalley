@@ -63,8 +63,24 @@ export default class GameLogic {
         return false;
     }
 
-    ai(board, player) {
-        this.getAllValidMovesForAllPieces(board, player)
+    #minimax(board, player, depth){
+        if (depth<=0 || this.checkForWinner(board)){
+            return;
+        }
+
+        depth--;
+        this.getAllValidMovesForAllPieces(board, player).forEach(move => {
+            const piece = board[move[1]][move[0]];
+            board[move[1]][move[0]]=0;
+            board[move[3]][move[2]]=piece;
+//todo
+            this.#minimax(board, player, depth);
+        })
+    }
+
+    ai(board, player, depth) {
+        let ai_board = [...board];
+        this.minimax(ai_board, player, depth)
     }
 
     #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {

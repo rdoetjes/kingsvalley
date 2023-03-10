@@ -54,7 +54,7 @@ function App() {
     }
     
     if (player===gameLogic.BLACK){
-      gameLogic.ai(board, player);
+      gameLogic.ai(board, player, 2);
     }
   }
 
