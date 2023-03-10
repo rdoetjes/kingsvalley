@@ -51,10 +51,7 @@ function App() {
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      let move = gameLogic.ai(board, player, 3);
-      const piece = board[move[1]][move[0]];
-      board[move[3]][move[2]] = piece;
-      board[move[1]][move[0]] = 0;
+      gameLogic.ai(board, 2);
       setBoard([...board]);
       if (checkForWinner(board)) return true;
     }
