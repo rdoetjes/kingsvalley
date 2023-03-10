@@ -84,6 +84,7 @@ export default class GameLogic {
                
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 0, depth - 1);   
+                if(score===1) {score+=100;}
                 this.#movePiece(ai_board, to_x, to_y, from_x, from_y);         
                 bestScore = Math.max(score,bestScore);
             }
@@ -99,6 +100,7 @@ export default class GameLogic {
                
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 1, depth - 1);  
+                if(score===0) {score-=100;}
                 this.#movePiece(ai_board, to_x, to_y, from_x, from_y);                
                 bestScore = Math.min(score, bestScore);     
             }
@@ -118,12 +120,10 @@ export default class GameLogic {
     }
 
     ai(board, depth) {
-        let ai_board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
         let bestScore = -Infinity;
         let bestMove;
 
         let moves = this.getAllValidMovesPlayerPieces(board, this.BLACK);
-        console.log(ai_board);
         for(let i=0; i<moves.length-1; i++){
             const from_x = moves[i][0];
             const from_y = moves[i][1];
@@ -133,7 +133,6 @@ export default class GameLogic {
             //make deep copy for each new move (nice and clean)
            let ai_board = this.#copyBoard(board);
             
-            console.log("move black: ", ai_board, from_x, from_y, to_x, to_y);
             this.#movePiece(ai_board, from_x, from_y, to_x, to_y);     
             let score = this.#minimax(ai_board, 0, depth);
             this.#movePiece(ai_board, to_x, to_y,  from_x, from_y);     
