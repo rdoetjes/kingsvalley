@@ -127,7 +127,7 @@ export default class GameLogic {
         return null;
     }
 
-    ai(board, depth) {
+    async ai(board, depth) {
         let bestScore = -Infinity;
         let bestMove;
 

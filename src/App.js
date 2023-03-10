@@ -11,6 +11,8 @@ function App() {
   const [disable, setDisable] = useState(false);
   const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
+  const [thinkCount, setThinkCount] = useState(0);
+
 
   function dragStart(e) {
     setLegalmove(false);
@@ -51,9 +53,10 @@ function App() {
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, 5);
-      setBoard([...board]);
-      if (checkForWinner(board)) return true;
+      gameLogic.ai(board, 5).then( () => {
+        setBoard([...board]);
+        if (checkForWinner(board)) return true;
+      });
     }
   }
 
@@ -75,7 +78,7 @@ function App() {
 
   return (
     <div className='center'>
-      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage} <div />
+      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage}<div />
         <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
         <button onClick={restartGame}>RESTART</button>
       </div>
