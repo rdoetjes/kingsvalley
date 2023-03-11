@@ -53,16 +53,17 @@ function App() {
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, 5);
-      setBoard([...board]);
-      if (checkForWinner(board)) return true;
+      gameLogic.ai(board, 4).then( () => {
+        setBoard([...board]);
+        if (checkForWinner(board)) return true;
+      });
     }
   }
 
   function restartGame() {
     setWinnerMessage('');
     setDisable(false);
-    setBoard(gameLogic.initBoard(invertedFaroa));
+    setBoard(gameLogic.initBoard());
     setPlayer(0);
   }
 
@@ -71,13 +72,13 @@ function App() {
   }
 
   useEffect(() => {
-    setBoard(gameLogic.initBoard(0));
+    setBoard(gameLogic.initBoard(gameLogic.N));
     setPlayer(0);
   }, [gameLogic]);
 
   return (
     <div className='center'>
-      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage} <div />
+      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage}<div />
         <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
         <button onClick={restartGame}>RESTART</button>
       </div>

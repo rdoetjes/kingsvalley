@@ -129,7 +129,7 @@ export default class GameLogic {
         return null;
     }
 
-    ai(board, depth) {
+    async ai(board, depth) {
         let bestScore = -Infinity;
         let bestMove;
 
@@ -140,7 +140,7 @@ export default class GameLogic {
             const to_x = moves[i][2];
             const to_y = moves[i][3];
 
-            //make deep copy for each new move (nice and clean)
+            //make deep copy for each new move (nice and clean).
             let ai_board = this.#copyBoard(board);
 
             //check for black farao victory (speeds up game)
