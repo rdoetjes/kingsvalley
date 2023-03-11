@@ -25,7 +25,7 @@ As funny as it initially was, to see you being led by the Pharaoh down the garde
 
 You can tweak the level of playing here, by chaging the 4 into a 5 you make it more difficult: 
 
-<code javascript>
+<pre>
   function dragEnd(e) {   
     if (!legalMove) return;
     if (checkForWinner(board)) return true;
@@ -37,7 +37,7 @@ You can tweak the level of playing here, by chaging the 4 into a 5 you make it m
       });
     }
   }
-</code>
+</pre>
 
 Just change the 5 to a 4, a 6 really takes long to churn through, and you get confronted with the "Page Not Responding" more than on 5. Which is a nice and challenging level for me. I found away to defeat level 4 all the time.<br/>
 I may actually create a difficulty slider at some point.
