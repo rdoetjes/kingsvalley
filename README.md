@@ -23,14 +23,15 @@ Each for should be broken out in it's own little method, or quite possible even 
 The AI is a simple straight forward brute force minimax() algorithm. This game is quite difficult to score, it basically as "draw", "win", "lose" and no easy way to cauge who has the upperhand. Unlike most other games. And in some cases it would even ignore a winning move, knowing that you were screwed and play with you like a cat with his prey. And just as you thought you were in the Valley, it would finally step in. This is now solved with an immediate "game_over" check that avoids the minimax scoring.</br>
 As funny as it initially was, to see you being led by the Pharaoh down the garden path and before you get into the shed, drop-kicked in the Egyptian (Dutch) jewels.
 
-You can tweak the depth of playing here: 
+You can tweak the level of playing here, by chaging the 4 into a 5 you make it more difficult: 
+
 <code>
   function dragEnd(e) {   
     if (!legalMove) return;
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, 5).then( () => {
+      gameLogic.ai(board, 4).then( () => {
         setBoard([...board]);
         if (checkForWinner(board)) return true;
       });
