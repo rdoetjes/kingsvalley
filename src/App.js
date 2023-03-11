@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Board from './components/Board'
 import GameLogic from "./GameLogic.js"
-import  { Tooltip as ReactTooltip } from "react-tooltip";
 import './App.css';
 
 function App() {

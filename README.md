@@ -9,6 +9,12 @@ You can play it here: <a href="https://gentle-beach-08e592103.2.azurestaticapps.
 
 ![Alt text](./screenshot.png?raw=true "King's Valley")
 
+## Game modes
+
+There are two game modes you can start/restart:<br/>
+↺ = the normal game with the Pharaoh on your side of the board, which is harder!
+↻ = the game option with the Pharaoh on the opposite side of the board, which is easier and more kid friendly.
+
 ## The code
 
 I wrote this in React, in order to get some (more) hands-on experience with React and JavaScript. As a systems- and backend developer, you don't get the chance to make UIs. And since I yearned to do some Blender modelling again, I decided to combine that with a little coding challence.
