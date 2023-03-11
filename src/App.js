@@ -37,9 +37,9 @@ function App() {
   }
 
   function checkForWinner(board) {
+    document.body.style.cursor = "";
     const winner = gameLogic.checkForWinner(board);
     if (winner !== -1) {
-      document.body.style.cursor = "";
       setWinnerMessage(" WINS!")
       setPlayer(winner);
       setDisable(true);
@@ -71,6 +71,7 @@ function App() {
   }
 
   function restartGame(gameNr) {
+    document.body.style.cursor = "";
     setWinnerMessage('');
     setDisable(false);
     setBoard(gameLogic.initBoard(gameNr));
