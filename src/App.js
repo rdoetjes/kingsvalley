@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Board from './components/Board'
 import GameLogic from "./GameLogic.js"
+import  { Tooltip as ReactTooltip } from "react-tooltip";
 import './App.css';
 
 function App() {
@@ -59,10 +60,18 @@ function App() {
     }
   }
 
-  function restartGame() {
+  function startGamePharaohLocalSide(){
+    restartGame(1);
+  }
+
+  function startGamePharaohEnemySide(){
+    restartGame(0);
+  }
+
+  function restartGame(gameNr) {
     setWinnerMessage('');
     setDisable(false);
-    setBoard(gameLogic.initBoard());
+    setBoard(gameLogic.initBoard(gameNr));
     setPlayer(0);
   }
 
@@ -78,7 +87,6 @@ function App() {
   }
 
   function changeLevelDown(e) {
-    
     let t_level = level
     t_level--;
     if (t_level < 2) t_level = 2;
@@ -86,7 +94,7 @@ function App() {
   }
 
   useEffect(() => {
-    setBoard(gameLogic.initBoard());
+    setBoard(gameLogic.initBoard(1));
     setPlayer(0);
   }, [gameLogic]);
 
@@ -97,7 +105,8 @@ function App() {
           <div className='level_txt'>Level: {level}
             <button className='level_btn' onClick={changeLevelUp} alt="^">▲</button>
             <button className='level_btn' onClick={changeLevelDown} alt="^">▼</button>
-            <button className='level_btn' alt="restart" onClick={restartGame}>↺</button>
+            <button className='level_btn' alt="restart" onClick={startGamePharaohLocalSide}>↺</button>
+            <button className='level_btn' alt="restart" onClick={startGamePharaohEnemySide}>↻</button>
           </div>
         </div>
       </div>
