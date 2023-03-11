@@ -5,7 +5,7 @@ The purpose of the game is to get your Pharaoh onto the centre square, to allow 
 Each piece can move horizontally, vertically and diagonally. However it has to move until it's blocked by the edge of the board or another piece. And the Scarabs, cannot land on the center square! </br>
 You will need to use your Scarabs in conjunction with your enemy's scarabs to allow your Pharaoh to walk into the the Valley and turn it in the the King's Valley.
 <p>
-You can play it here: <a href="https://white-bush-08504a503.2.azurestaticapps.net/">King's Valley</a>
+You can play it here: <a href="https://gentle-beach-08e592103.2.azurestaticapps.net/">King's Valley</a>
 
 ![Alt text](./screenshot.png?raw=true "King's Valley")
 
