@@ -11,6 +11,7 @@ function App() {
   const [disable, setDisable] = useState(false);
   const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
+  const [level, setLevel] = useState(4);
 
   function dragStart(e) {
     setLegalmove(false);
@@ -23,13 +24,13 @@ function App() {
     const to_x = parseInt(e.target.getAttribute("pos_j"));
     const to_y = parseInt(e.target.getAttribute("pos_i"));
 
-    if (gameLogic.didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y)) {  
+    if (gameLogic.didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y)) {
       const t = board[from_y][from_x];
       board[from_y][from_x] = 0;
       board[to_y][to_x] = t;
       checkForWinner(board);
-      setBoard([...board]);    
-      setLegalmove(true); 
+      setBoard([...board]);
+      setLegalmove(true);
       return;
     }
   }
@@ -46,12 +47,12 @@ function App() {
     return false;
   }
 
-  function dragEnd(e) {   
+  function dragEnd(e) {
     if (!legalMove) return;
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, 4).then( () => {
+      gameLogic.ai(board, level).then(() => {
         setBoard([...board]);
         if (checkForWinner(board)) return true;
       });
@@ -69,18 +70,37 @@ function App() {
     return player === gameLogic.WHITE ? "WHITE" : "BLACK";
   }
 
+  function changeLevelUp(e) {
+    let t_level = level
+    t_level++;
+    if (t_level > 5) t_level = 5;
+    setLevel(t_level);
+  }
+
+  function changeLevelDown(e) {
+    
+    let t_level = level
+    t_level--;
+    if (t_level < 2) t_level = 2;
+    setLevel(t_level);
+  }
+
   useEffect(() => {
     setBoard(gameLogic.initBoard());
     setPlayer(0);
   }, [gameLogic]);
 
   return (
-    <div className='center'>
-      <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage}<div />
-        <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
-        <button onClick={restartGame}>RESTART</button>
+      <div className='center'>
+        <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage}<div />
+          <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
+          <div className='level_txt'>Level: {level}
+            <button className='level_btn' onClick={changeLevelUp} alt="^">▲</button>
+            <button className='level_btn' onClick={changeLevelDown} alt="^">▼</button>
+            <button className='level_btn' alt="restart" onClick={restartGame}>↺</button>
+          </div>
+        </div>
       </div>
-    </div>
   );
 }
 

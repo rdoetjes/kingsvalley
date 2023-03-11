@@ -3,6 +3,43 @@ body {
   background-size: cover;
 }
 
+.level_btn{
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  font-size: 1.3pc;
+  color: rgb(69, 38, 0);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.level_btn:hover{
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  background-color: rgb(155, 119, 71);
+}
+
+.level_btn:active {
+  margin-left: 1px 1px 0;
+  box-shadow: -1px -1px 1px #000;
+  outline: 1px solid #000000;
+  -moz-outline-radius: 7px;
+  background-image: linear-gradient(to top, #87580b, #543107);
+}
+
+.level_txt{
+  padding-top: 1px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 1.5pc;
+  color: rgb(69, 38, 0);
+}
+
 .center{
   margin: auto;
   display: flex;
