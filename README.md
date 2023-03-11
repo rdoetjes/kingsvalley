@@ -1,11 +1,12 @@
 # King's Valley
 
-King's Valley is an abstract startegy game, written by <a href="https://www.youtube.com/watch?v=y9o_ydV63Ho">Mr. Mitsuo Yammamoto</a>.
-Three years a go I created an actual board version, with my own spin using Pharaohs and Scarabs.
+King's Valley is an abstract startegy game, written by <a href="https://www.youtube.com/watch?v=y9o_ydV63Ho">Mr. Mitsuo Yamamoto</a>.
+Three years a go I created an actual board version, with my own spin on his abstract game layout. I decided to spice the look and feel up with some Pharaohs and Scarabs. And now I wanted to learn some React and JavaScript, so I wrote the game as a browser version.
 
 ## Rules and goal of the game
 
-The purpose of the game is to get your Pharaoh onto the centre square, to allow his dynasty to flourish.<br/>
+The goal of the game is to get your Pharaoh onto the centre square, to allow his dynasty to flourish.
+<p>
 Each piece can move horizontally, vertically and diagonally. However it has to move until it's either blocked by a piece or the edge of the board!!! 
 <p>
 The Scarabs, cannot land on the center square! </br>
@@ -23,7 +24,7 @@ There are two game modes you can start/restart:<br/>
 ↺ = the normal game with the Pharaoh on your side of the board, which is harder!
 ↻ = the game option with the Pharaoh on the opposite side of the board, which is easier and more kid friendly.
 
-## The code
+# The code
 
 I wrote this in React, in order to get some (more) hands-on experience with React and JavaScript. As a systems- and backend developer, you don't get the chance to make UIs. And since I yearned to do some Blender modelling again, I decided to combine that with a little coding challence.
 <p>
