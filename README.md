@@ -25,7 +25,7 @@ As funny as it initially was, to see you being led by the Pharaoh down the garde
 
 You can tweak the level of playing here, by chaging the 4 into a 5 you make it more difficult: 
 
-<code>
+<code javascript>
   function dragEnd(e) {   
     if (!legalMove) return;
     if (checkForWinner(board)) return true;
