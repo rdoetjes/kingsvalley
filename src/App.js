@@ -31,17 +31,18 @@ function App() {
       checkForWinner(board);
       setBoard([...board]);
       setLegalmove(true);
+      document.body.style.cursor = "wait"; 
       return;
     }
   }
 
   function checkForWinner(board) {
+    document.body.style.cursor = "";
     const winner = gameLogic.checkForWinner(board);
     if (winner !== -1) {
       setWinnerMessage(" WINS!")
       setPlayer(winner);
       setDisable(true);
-      document.body.style.cursor = "";
       return true;
     }
     setPlayer(player ^ 1);
@@ -49,13 +50,9 @@ function App() {
   }
 
   function dragEnd(e) {
-    document.body.style.cursor = "";
     if (!legalMove) return;
-
-    document.body.style.cursor = "";
     if (checkForWinner(board)) return true;
-    
-    document.body.style.cursor = "wait";
+
     if (player === gameLogic.BLACK) {
       gameLogic.ai(board, level).then(() => {
         setBoard([...board]);
@@ -74,7 +71,6 @@ function App() {
   }
 
   function restartGame(gameNr) {
-    document.body.style.cursor = "";
     setWinnerMessage('');
     setDisable(false);
     setBoard(gameLogic.initBoard(gameNr));
