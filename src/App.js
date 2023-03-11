@@ -58,8 +58,8 @@ function App() {
         setBoard([...board]);
         if (checkForWinner(board)) return true;
       });
-      document.body.style.cursor = "";
     }
+    document.body.style.cursor = "";
   }
 
   function startGamePharaohLocalSide(){
@@ -71,7 +71,6 @@ function App() {
   }
 
   function restartGame(gameNr) {
-    document.body.style.cursor = "";
     setWinnerMessage('');
     setDisable(false);
     setBoard(gameLogic.initBoard(gameNr));
