@@ -40,6 +40,22 @@ body {
   color: rgb(69, 38, 0);
 }
 
+a:link{
+  padding-top: 1px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 1pc;
+  color: rgb(69, 38, 0);
+}
+
+a:visited{
+  padding-top: 1px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 1pc;
+  color: rgb(69, 38, 0);
+}
+
 .center{
   margin: auto;
   display: flex;

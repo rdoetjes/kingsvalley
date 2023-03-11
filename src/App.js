@@ -101,11 +101,12 @@ function App() {
       <div className='center'>
         <div className='title'>KING'S VALLEY PLAYER: {playerColor(player)} {winnerMessage}<div />
           <Board board={board} size={gameLogic.N} dragStart={dragStart} dragDrop={dragDrop} dragEnd={dragEnd} disable={disable} />
-          <div className='level_txt'>Level: {level}
+          <div className='level_txt'>level: {level}
             <button className='level_btn' onClick={changeLevelUp} alt="^">▲</button>
             <button className='level_btn' onClick={changeLevelDown} alt="^">▼</button>
             <button className='level_btn' alt="restart" onClick={startGamePharaohLocalSide}>↺</button>
             <button className='level_btn' alt="restart" onClick={startGamePharaohEnemySide}>↻</button>
+            <a className='level_txt_small' href='https://github.com/rdoetjes/kingsvalley#readme'>rules and explanation</a>
           </div>
         </div>
       </div>

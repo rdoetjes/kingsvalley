@@ -1,6 +1,7 @@
 # King's Valley
 
 King's Valley is an abstract startegy game, written by <a href="https://www.youtube.com/watch?v=y9o_ydV63Ho">Mr. Mitsuo Yammamoto</a>.
+Three years a go I created an actual board version, with my own spin using Pharaohs and Scarabs.
 
 ## Rules and goal of the game
 
