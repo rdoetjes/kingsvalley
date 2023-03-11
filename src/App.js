@@ -31,6 +31,7 @@ function App() {
       checkForWinner(board);
       setBoard([...board]);
       setLegalmove(true);
+      document.body.style.cursor = "wait"; 
       return;
     }
   }
@@ -56,6 +57,7 @@ function App() {
         setBoard([...board]);
         if (checkForWinner(board)) return true;
       });
+      document.body.style.cursor = "";
     }
   }
 
