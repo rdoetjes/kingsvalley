@@ -42,7 +42,7 @@ As funny as it initially was, to see you being led by the Pharaoh down the garde
 <p>
 You can tweak the difficulty level with the: ▲▼ buttons. This can even be done when it's your turn!
 <p>
-Feel free to take the code and hack it, improve on it! For me the learning experience is done and I will put this project to rest. Well... perhaps I will create and AI and rule checker in Rust or C++ as a Rest API so we can checker deeper and faster by multithreading it! 
+Feel free to take the code and hack it, improve on it! It's available under the GPLv2 License! For me the learning experience is done and I will put this project to rest. Well... perhaps I will create and AI and rule checker in Rust or C++ as a Rest API so we can checker deeper and faster by multithreading it! 
 
 ## Build app
 
