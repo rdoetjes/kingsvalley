@@ -101,7 +101,7 @@ export default class GameLogic {
 
                 this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 1, depth - 1);
-                if (score === 0) { score = -1 * Math.random() * 10000; }
+                if (score === 0) { score = -1 * (Math.random() * 10000); }
                 this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
                 bestScore = Math.min(score, bestScore);
             }
