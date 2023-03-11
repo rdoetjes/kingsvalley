@@ -11,7 +11,6 @@ function App() {
   const [disable, setDisable] = useState(false);
   const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
-  const [invertedFaroa, setInvertedFarao] = useState(1);
 
   function dragStart(e) {
     setLegalmove(false);
@@ -41,7 +40,6 @@ function App() {
       setWinnerMessage(" WINS!")
       setPlayer(winner);
       setDisable(true);
-      setInvertedFarao(invertedFaroa^1);
       return true;
     }
     setPlayer(player ^ 1);
@@ -72,7 +70,7 @@ function App() {
   }
 
   useEffect(() => {
-    setBoard(gameLogic.initBoard(gameLogic.N));
+    setBoard(gameLogic.initBoard());
     setPlayer(0);
   }, [gameLogic]);
 

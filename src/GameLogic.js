@@ -22,12 +22,10 @@ export default class GameLogic {
         return -1;
     }
 
-    initBoard(invertedFaroa) {
+    initBoard() {
         let board = Array.from({ length: this.N }, () => Array.from({ length: this.N }, () => 0));
- 
         const blackPieces = [this.BB, this.BB, this.BF, this.BB, this.BB];
         const whitePieces = [this.WB, this.WB, this.WF, this.WB, this.WB];
-       
 
         for (let i = 0; i < this.N; i++) {
             for (let j = 0; j < this.N; j++) {
@@ -69,7 +67,7 @@ export default class GameLogic {
         ai_board[from_y][from_x] = 0;
     }
 
-    async #minimax(ai_board, maximizingplayer, depth) {
+    #minimax(ai_board, maximizingplayer, depth) {
         let score = this.checkForWinner(ai_board);
         if (depth <= 0 || score === 1) {
             if (score === 1) return Infinity;
