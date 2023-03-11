@@ -1,4 +1,46 @@
-# Getting Started with Create React App
+# King's Valley
+
+King's Valley is an abstract startegy game, written by <a href="https://www.youtube.com/watch?v=y9o_ydV63Ho">Mr. Mitsuo Yammamoto</a>.
+The purpose of the game is to get your Pharaoh onto the centre square, to allow his dynasty to flourish.<br/>
+Each piece can move horizontally, vertically and diagonally. However it has to move until it's blocked by the edge of the board or another piece. And the Scarabs, cannot land on the center square! </br>
+You will need to use your Scarabs in conjunction with your enemy's scarabs to allow your Pharaoh to walk into the the Valley and turn it in the the King's Valley.
+<p>
+![Alt text](./screenshot.png?raw=true "King's Valley")
+
+## The code
+
+I wrote this in React, in order to get some (more) hands-on experience with React and JavaScript. As a systems- and backend developer, you don't get the chance to make UIs. And since I yearned to do some Blender modelling again, I decided to combine that with a little coding challence.
+<p>
+The code can be changed and improved -- especially refactor the method below.
+<code>
+#getAllMovesPiece(board, from_x, from_y) 
+</code>
+Each for should be broken out in it's own little method, or quite possible even with self modifying code... It's JavaScript so reflection/eval is possible, LOL! I just can't be bothered it works. 
+
+### The AI
+
+The AI is a simple straight forward brute force minimax() algorithm. This game is quite difficult to score, it basically as "draw", "win", "lose" and no easy way to cauge who has the upperhand. Unlike most other games. And in some cases it would even ignore a winning move, knowing that you were screwed and play with you like a cat with his prey. And just as you thought you were in the Valley, it would finally step in. This is now solved with an immediate "game_over" check that avoids the minimax scoring.</br>
+As funny as it initially was, to see you being led by the Pharaoh down the garden path and before you get into the shed, drop-kicked in the Egyptian (Dutch) jewels.
+
+You can tweak the depth of playing here: 
+<code>
+  function dragEnd(e) {   
+    if (!legalMove) return;
+    if (checkForWinner(board)) return true;
+
+    if (player === gameLogic.BLACK) {
+      gameLogic.ai(board, 5).then( () => {
+        setBoard([...board]);
+        if (checkForWinner(board)) return true;
+      });
+    }
+  }
+</code>
+
+Just change the 5 to a 4, a 6 really takes long to churn through, and you get confronted with the "Page Not Responding" more than on 5. Which is a nice and challenging level for me. I found away to defeat level 4 all the time.<br/>
+I may actually create a difficulty slider at some point.
+
+## Build app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
