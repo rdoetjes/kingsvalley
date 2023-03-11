@@ -75,6 +75,7 @@ function App() {
     setDisable(false);
     setBoard(gameLogic.initBoard(gameNr));
     setPlayer(0);
+    document.body.style.cursor = "";
   }
 
   function playerColor(player) {
