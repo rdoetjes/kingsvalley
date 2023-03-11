@@ -1,9 +1,16 @@
 # King's Valley
 
 King's Valley is an abstract startegy game, written by <a href="https://www.youtube.com/watch?v=y9o_ydV63Ho">Mr. Mitsuo Yammamoto</a>.
+
+## Rules and goal of the game
+
 The purpose of the game is to get your Pharaoh onto the centre square, to allow his dynasty to flourish.<br/>
-Each piece can move horizontally, vertically and diagonally. However it has to move until it's blocked by the edge of the board or another piece. And the Scarabs, cannot land on the center square! </br>
-You will need to use your Scarabs in conjunction with your enemy's scarabs to allow your Pharaoh to walk into the the Valley and turn it in the the King's Valley.
+Each piece can move horizontally, vertically and diagonally. However it has to move until it's either blocked by a piece or the edge of the board!!! 
+<p>
+The Scarabs, cannot land on the center square! </br>
+You will need to use your Scarabs in conjunction with your enemy's scarabs to allow your Pharaoh to walk into the the Valley and turn it in the "King's Valley!"
+<p>
+You move the gold (white) pieces by simply drag and drop. The piece will only be allowed to be dropped on a square when it is a valid move.
 <p>
 You can play it here: <a href="https://gentle-beach-08e592103.2.azurestaticapps.net/">King's Valley</a>
 
