@@ -39,6 +39,7 @@ function App() {
   function checkForWinner(board) {
     const winner = gameLogic.checkForWinner(board);
     if (winner !== -1) {
+      document.body.style.cursor = "";
       setWinnerMessage(" WINS!")
       setPlayer(winner);
       setDisable(true);
