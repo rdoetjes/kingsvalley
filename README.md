@@ -10,7 +10,7 @@ The goal of the game is to get your Pharaoh onto the centre square, to allow his
 Each piece can move horizontally, vertically and diagonally. However it has to move until it's either blocked by a piece or the edge of the board!!! 
 <p>
 The Scarabs, cannot land on the center square! </br>
-You will need to use your Scarabs in conjunction with your enemy's scarabs to allow your Pharaoh to walk into the the Valley and turn it in the "King's Valley!"
+You will need to use your Scarabs in conjunction with your enemy's scarabs to allow your Pharaoh to walk into the the Valley and turn it into "The King's Valley!"
 <p>
 You move the gold (white) pieces by simply drag and drop. The piece will only be allowed to be dropped on a square when it is a valid move.
 <p>
@@ -21,7 +21,7 @@ You can play it here: <a href="https://gentle-beach-08e592103.2.azurestaticapps.
 ## Game modes
 
 There are two game modes you can start/restart:<br/>
-↺ = the normal game with the Pharaoh on your side of the board, which is harder!
+↺ = the normal game with the Pharaoh on your side of the board, which is harder!<br/>
 ↻ = the game option with the Pharaoh on the opposite side of the board, which is easier and more kid friendly.
 
 # The code
@@ -36,27 +36,13 @@ Each for should be broken out in it's own little method, or quite possible even 
 
 ### The AI
 
-The AI is a simple straight forward brute force minimax() algorithm. This game is quite difficult to score, it basically as "draw", "win", "lose" and no easy way to cauge who has the upperhand. Unlike most other games. And in some cases it would even ignore a winning move, knowing that you were screwed and play with you like a cat with his prey. And just as you thought you were in the Valley, it would finally step in. This is now solved with an immediate "game_over" check that avoids the minimax scoring.</br>
+The AI is a simple straight forward brute force minimax() algorithm. This game is quite difficult to score, it basically as "draw", "win", "lose" and no easy way to cauge who has the upperhand. Unlike most other games. The AI intially would in some cases ignore his winning move; knowing that you were screwed and play with you like a cat with his prey. And just as you thought you were in the Valley, it would finally step in. This is now solved with an explicit "game_over" check, that avoids the minimax scoring to br ran.
+<p>
 As funny as it initially was, to see you being led by the Pharaoh down the garden path and before you get into the shed, drop-kicked in the Egyptian (Dutch) jewels.
-
-You can tweak the level of playing here, by chaging the 4 into a 5 you make it more difficult: 
-
-<pre>
-  function dragEnd(e) {   
-    if (!legalMove) return;
-    if (checkForWinner(board)) return true;
-
-    if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, 4).then( () => {
-        setBoard([...board]);
-        if (checkForWinner(board)) return true;
-      });
-    }
-  }
-</pre>
-
-Just change the 5 to a 4, a 6 really takes long to churn through, and you get confronted with the "Page Not Responding" more than on 5. Which is a nice and challenging level for me. I found away to defeat level 4 all the time.<br/>
-I may actually create a difficulty slider at some point.
+<p>
+You can tweak the difficulty level with the: ▲▼ buttons. This can even be done when it's your turn!
+<p>
+Feel free to take the code and hack it, improve on it! For me the learning experience is done and I will put this project to rest. Well... perhaps I will create and AI and rule checker in Rust or C++ as a Rest API so we can checker deeper and faster by multithreading it! 
 
 ## Build app
 
