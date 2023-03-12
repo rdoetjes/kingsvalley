@@ -70,9 +70,9 @@ export default class GameLogic {
         return false;
     }
 
-    #movePiece(ai_board, from_x, from_y, to_x, to_y) {
-        ai_board[to_y][to_x] = ai_board[from_y][from_x];
-        ai_board[from_y][from_x] = 0;
+    movePiece(board, from_x, from_y, to_x, to_y) {
+        board[to_y][to_x] = board[from_y][from_x];
+        board[from_y][from_x] = 0;
     }
 
     #minimax(ai_board, maximizingplayer, depth) {
@@ -91,10 +91,10 @@ export default class GameLogic {
                 const to_x = moves[i][2];
                 const to_y = moves[i][3];
 
-                this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
+                this.movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 0, depth - 1);
                 if (score === 1) { return Infinity; }
-                this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
+                this.movePiece(ai_board, to_x, to_y, from_x, from_y);
                 bestScore = Math.max(score, bestScore);
             }
             return bestScore;
@@ -107,10 +107,10 @@ export default class GameLogic {
                 const to_x = moves[i][2];
                 const to_y = moves[i][3];
 
-                this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
+                this.movePiece(ai_board, from_x, from_y, to_x, to_y);
                 score = this.#minimax(ai_board, 1, depth - 1);
                 if (score === 0) { score = -1 * (Math.random() * 10000); }
-                this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
+                this.movePiece(ai_board, to_x, to_y, from_x, from_y);
                 bestScore = Math.min(score, bestScore);
             }
             return bestScore;
@@ -156,16 +156,16 @@ export default class GameLogic {
                 break;
             }
 
-            this.#movePiece(ai_board, from_x, from_y, to_x, to_y);
+            this.movePiece(ai_board, from_x, from_y, to_x, to_y);
             let score = this.#minimax(ai_board, 0, depth);
-            this.#movePiece(ai_board, to_x, to_y, from_x, from_y);
+            this.movePiece(ai_board, to_x, to_y, from_x, from_y);
 
             if (score > bestScore) {
                 bestMove = { from_x, from_y, to_x, to_y };
                 bestScore = score;
             }
         }
-        this.#movePiece(board, bestMove.from_x, bestMove.from_y, bestMove.to_x, bestMove.to_y);
+        this.movePiece(board, bestMove.from_x, bestMove.from_y, bestMove.to_x, bestMove.to_y);
     }
 
     #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {

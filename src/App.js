@@ -25,9 +25,7 @@ function App() {
     const to_y = parseInt(e.target.getAttribute("pos_i"));
 
     if (gameLogic.didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y)) {
-      const t = board[from_y][from_x];
-      board[from_y][from_x] = 0;
-      board[to_y][to_x] = t;
+      gameLogic.movePiece(board, from_x, from_y, to_x, to_y);
       checkForWinner(board);
       setBoard([...board]);
       setLegalmove(true);
