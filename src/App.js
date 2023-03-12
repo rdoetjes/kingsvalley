@@ -13,6 +13,14 @@ function App() {
   const [winnerMessage, setWinnerMessage] = useState('');
   const [level, setLevel] = useState(4);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (player===gameLogic.WHITE) 
+        document.body.style.cursor = ""; 
+    }, 250);
+    return () => clearInterval(interval);
+  }, [player, gameLogic.WHITE]);
+
   function dragStart(e) {
     setLegalmove(false);
     setFromPos(e.target);
