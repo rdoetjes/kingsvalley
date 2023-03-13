@@ -14,7 +14,7 @@ You will need to use your Scarabs in conjunction with your enemy's scarabs to al
 <p>
 You move the gold (white) pieces by simply drag and drop. The piece will only be allowed to be dropped on a square when it is a valid move.
 <p>
-You can play it here: <a href="https://gentle-beach-08e592103.2.azurestaticapps.net/">King's Valley</a>
+You can play it here: <a href="https://kingsvalley.phonax.com/">King's Valley</a>
 
 ![Alt text](./screenshot.png?raw=true "King's Valley")
 
