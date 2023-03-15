@@ -12,6 +12,9 @@ function App() {
   const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
   const [level, setLevel] = useState(4);
+  const loseAudio = new Audio("./sounds/laugh.mp3");
+  const moveAudio = new Audio("./sounds/move.mp3");
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,6 +37,7 @@ function App() {
 
     if (gameLogic.didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y)) {
       gameLogic.movePiece(board, from_x, from_y, to_x, to_y);
+      moveAudio.play();
       checkForWinner(board);
       setBoard([...board]);
       setLegalmove(true);
@@ -48,6 +52,7 @@ function App() {
     if (winner !== -1) {
       setWinnerMessage(" WINS!")
       setPlayer(winner);
+      if (winner===gameLogic.BLACK) loseAudio.play();
       setDisable(true);
       return true;
     }
@@ -63,6 +68,7 @@ function App() {
       gameLogic.ai(board, level).then(() => {
         setBoard([...board]);
         if (checkForWinner(board)) return true;
+        moveAudio.play();
       });
     }
     document.body.style.cursor = "";
