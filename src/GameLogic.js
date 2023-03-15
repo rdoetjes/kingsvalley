@@ -200,10 +200,8 @@ export default class GameLogic {
         return allMoves;
     }
 
-    #getAllMovesPiece(board, from_x, from_y) {
-        let possiblePos = Array.from({ length: 8 }, () => Array.from({ length: 2 }, () => null))
-        //TODO: refector into loose methods
-        //diagonal down right
+    //set the end position of x-- and y++ in slot 0 of possiblePos
+    #checkDiagonal0(board, possiblePos, from_x, from_y){
         let obstacle = false;
         for (let x = from_x, y = from_y; x >= 0 && y < this.N; x--, y++) {
             if (from_x !== x && from_y !== y && board[y][x] !== 0) {
@@ -217,9 +215,11 @@ export default class GameLogic {
                 possiblePos[0][1] = y;
             }
         }
+    }
 
-        //diagonal up right
-        obstacle = false;
+    //set the end position of x++ and y-- in slot 1 of possiblePos
+    #checkDiagonal1(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; x < this.N && y >= 0; x++, y--) {
             if (from_x !== x && from_y !== y && board[y][x] !== 0) {
                 possiblePos[1][0] = x - 1;
@@ -232,9 +232,11 @@ export default class GameLogic {
                 possiblePos[1][1] = y;
             }
         }
+    }
 
-        //diagonal down left
-        obstacle = false;
+    //set the end position of x++and y++ in slot 2 of possiblePos
+    #checkDiagonal2(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; x < this.N && y < this.N; x++, y++) {
             if (from_x !== x && from_y !== y && board[y][x] !== 0) {
                 possiblePos[2][0] = x - 1;
@@ -247,9 +249,11 @@ export default class GameLogic {
                 possiblePos[2][1] = y;
             }
         }
+    }
 
-        //diagonal down right
-        obstacle = false;
+    //set the end position of x-- and y-- in slot 3 of possiblePos
+    #checkDiagonal3(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; x >= 0 && y >= 0; x--, y--) {
             if (from_x !== x && from_y !== y && board[y][x] !== 0) {
                 possiblePos[3][0] = x + 1;
@@ -262,9 +266,11 @@ export default class GameLogic {
                 possiblePos[3][1] = y;
             }
         }
+    }
 
-        //check horizontal right
-        obstacle = false
+    //set the end position of x-1 in slot 4 of possiblePos
+    #checkHorizontal0(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; x < this.N; x++) {
             if (from_x !== x && board[y][x] !== 0) {
                 possiblePos[4][0] = x - 1;
@@ -277,9 +283,11 @@ export default class GameLogic {
                 possiblePos[4][1] = y;
             }
         }
+    }
 
-        //check horizontal left
-        obstacle = false;
+    //set the end position of x-- in slot 5 of possiblePos
+    #checkHorizontal1(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; x >= 0; x--) {
             if (from_x !== x && board[y][x] !== 0) {
                 possiblePos[5][0] = x + 1;
@@ -292,9 +300,11 @@ export default class GameLogic {
                 possiblePos[5][1] = y;
             }
         }
+    }
 
-        //check vertical up
-        obstacle = false;
+    //set the end position of y-- in slot 6 of possiblePos
+    #checkHorizontal2(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; y >= 0; y--) {
             if (from_y !== y && board[y][x] !== 0) {
                 possiblePos[6][0] = x;
@@ -307,9 +317,11 @@ export default class GameLogic {
                 possiblePos[6][1] = y;
             }
         }
+    }
 
-        //check vertical down
-        obstacle = false;
+    //set the end position of y++ in slot 6 of possiblePos
+    #checkHorizontal3(board, possiblePos, from_x, from_y){
+        let obstacle = false;
         for (let x = from_x, y = from_y; y < this.N; y++) {
             if (from_y !== y && board[y][x] !== 0) {
                 possiblePos[7][0] = x;
@@ -322,6 +334,23 @@ export default class GameLogic {
                 possiblePos[7][1] = y;
             }
         }
+    }
+
+    /*
+    Fills the array of 8x2 named possiblePos with all the combinations of a certain piece's dierctional index
+    */
+    #getAllMovesPiece(board, from_x, from_y) {
+        let possiblePos = Array.from({ length: 8 }, () => Array.from({ length: 2 }, () => null))
+
+        this.#checkDiagonal0(board, possiblePos, from_x, from_y);
+        this.#checkDiagonal1(board, possiblePos, from_x, from_y);
+        this.#checkDiagonal2(board, possiblePos, from_x, from_y);
+        this.#checkDiagonal3(board, possiblePos, from_x, from_y);
+
+        this.#checkHorizontal0(board, possiblePos, from_x, from_y);
+        this.#checkHorizontal1(board, possiblePos, from_x, from_y);
+        this.#checkHorizontal2(board, possiblePos, from_x, from_y);
+        this.#checkHorizontal3(board, possiblePos, from_x, from_y);
 
         return possiblePos;
     }
