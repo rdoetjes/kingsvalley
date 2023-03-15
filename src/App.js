@@ -14,6 +14,7 @@ function App() {
   const [level, setLevel] = useState(4);
   const loseAudio = new Audio("./sounds/laugh.mp3");
   const moveAudio = new Audio("./sounds/move.mp3");
+  const winAudio = new Audio("./sounds/win.mp3");
 
 
   useEffect(() => {
@@ -52,7 +53,10 @@ function App() {
     if (winner !== -1) {
       setWinnerMessage(" WINS!")
       setPlayer(winner);
-      if (winner===gameLogic.BLACK) loseAudio.play();
+      if (winner===gameLogic.BLACK) 
+        loseAudio.play();
+      else
+        winAudio.play();
       setDisable(true);
       return true;
     }
