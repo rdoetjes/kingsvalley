@@ -30,8 +30,8 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       if(toImg && fromImg){
-        fromImg.setAttribute("style", "border: 1px solid rgba(255,0,1,0);")
-        toImg.setAttribute("style", "border: 1px solid rgba(255,0,1,0);")
+        fromImg.setAttribute("style", "background-color: rgba(255,0,0,0);");
+        toImg.setAttribute("style", "background-color: rgba(255,0,0,0);")
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -87,8 +87,8 @@ function App() {
         let toImg = document.getElementsByName(String(move.to_y)+","+String(move.to_x));
         setToImg(toImg[0]);
         setFromImg(fromImg[0]);
-        fromImg[0].setAttribute("style", "border: 1px solid rgba(255,0,1,1);")
-        toImg[0].setAttribute("style", "border: 1px solid rgba(255,0,1,1);")
+        fromImg[0].setAttribute("style", "background-color: rgba(255,0,0,0.2);");
+        toImg[0].setAttribute("style", "background-color: rgba(255,0,0,0.2);");
         setBoard([...board]);
         if (checkForWinner(board)) return true;
         moveAudio.play();
