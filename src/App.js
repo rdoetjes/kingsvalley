@@ -76,6 +76,16 @@ function App() {
     return false;
   }
 
+  function highLightToFrom(fromImg, toImg){
+    if (!fromImg || !toImg)
+     return;
+     
+    setToImg(fromImg);
+    setFromImg(toImg);
+    fromImg.setAttribute("style", "background-color: rgba(255,0,0,0.2);");
+    toImg.setAttribute("style", "background-color: rgba(255,0,0,0.2);");
+  }
+
   function dragEnd(e) {
     if (!legalMove) return;
     if (checkForWinner(board)) return true;
@@ -83,12 +93,8 @@ function App() {
     if (player === gameLogic.BLACK) {
       gameLogic.ai(board, level).then((move) => {
         gameLogic.movePiece(board, move.from_x, move.from_y, move.to_x, move.to_y);
-        let fromImg = document.getElementsByName(String(move.from_y)+","+String(move.from_x));
-        let toImg = document.getElementsByName(String(move.to_y)+","+String(move.to_x));
-        setToImg(toImg[0]);
-        setFromImg(fromImg[0]);
-        fromImg[0].setAttribute("style", "background-color: rgba(255,0,0,0.2);");
-        toImg[0].setAttribute("style", "background-color: rgba(255,0,0,0.2);");
+        highLightToFrom(document.getElementsByName(String(move.from_y)+","+String(move.from_x))[0], 
+                        document.getElementsByName(String(move.to_y)+","+String(move.to_x))[0]);
         setBoard([...board]);
         if (checkForWinner(board)) return true;
         moveAudio.play();
