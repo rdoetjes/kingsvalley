@@ -51,8 +51,8 @@ function App() {
     document.body.style.cursor = "";
     const winner = gameLogic.checkForWinner(board);
     if (winner !== -1) {
-      setWinnerMessage(" WINS!")
       setPlayer(winner);
+      setWinnerMessage(" WINS!")
       if (winner===gameLogic.BLACK) 
         loseAudio.play();
       else
