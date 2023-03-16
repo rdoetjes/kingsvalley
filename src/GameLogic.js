@@ -168,7 +168,7 @@ export default class GameLogic {
         this.movePiece(board, bestMove.from_x, bestMove.from_y, bestMove.to_x, bestMove.to_y);
     }
 
-    #createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y) {
+    #createArrayWithAllToFromPlayerMoves(board, allMoves, from_x, from_y) {
         let record = [4];
         this.#getAllValidMovesForSelectedPiece(board, from_x, from_y).forEach(element => {
             if (element[0] !== null) {
@@ -187,12 +187,12 @@ export default class GameLogic {
             for (let from_x = 0; from_x < this.N; from_x++) {
                 if (player === this.BLACK) {
                     if (board[from_y][from_x] === 1 || board[from_y][from_x] === 2) {
-                        this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);
+                        this.#createArrayWithAllToFromPlayerMoves(board, allMoves, from_x, from_y);
                     }
                 }
                 if (player === this.WHITE) {
                     if (board[from_y][from_x] === 3 || board[from_y][from_x] === 4) {
-                        this.#createArrayOfAllPlayerMovesWithFromToVector(board, allMoves, from_x, from_y);
+                        this.#createArrayWithAllToFromPlayerMoves(board, allMoves, from_x, from_y);
                     }
                 }
             }
