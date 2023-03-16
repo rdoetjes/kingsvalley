@@ -165,7 +165,7 @@ export default class GameLogic {
                 bestScore = score;
             }
         }
-        this.movePiece(board, bestMove.from_x, bestMove.from_y, bestMove.to_x, bestMove.to_y);
+        return { from_x: bestMove.from_x, from_y: bestMove.from_y, to_x: bestMove.to_x, to_y: bestMove.to_y};
     }
 
     #createArrayWithAllToFromPlayerMoves(board, allMoves, from_x, from_y) {

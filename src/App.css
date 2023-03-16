@@ -78,9 +78,10 @@ a:visited{
 }
 
 .board {
-  width: 500px;
-  height: 500px;
+  width: 511px;
+  height: 510px;
   background-image: url('images/bg_board.png');
+  background-size: cover;
   display: flex;
   flex-wrap: wrap;
 }
@@ -89,4 +90,5 @@ img {
   padding: 5px;
   width: 90px;
   height: 90px;
+  border: 1px solid rgba(255,0,1,0);
 }

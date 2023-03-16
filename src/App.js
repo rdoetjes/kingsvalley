@@ -12,6 +12,8 @@ function App() {
   const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
   const [level, setLevel] = useState(4);
+  const [toImg, setToImg] = useState(null);
+  const [fromImg, setFromImg] = useState(null);
   const loseAudio = new Audio("./sounds/laugh.mp3");
   const moveAudio = new Audio("./sounds/move.mp3");
   const winAudio = new Audio("./sounds/win.mp3");
@@ -24,6 +26,16 @@ function App() {
     }, 250);
     return () => clearInterval(interval);
   }, [player, gameLogic.WHITE]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(toImg && fromImg){
+        fromImg.setAttribute("style", "border: 1px solid rgba(255,0,1,0);")
+        toImg.setAttribute("style", "border: 1px solid rgba(255,0,1,0);")
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [toImg, fromImg]);
 
   function dragStart(e) {
     setLegalmove(false);
@@ -69,7 +81,14 @@ function App() {
     if (checkForWinner(board)) return true;
 
     if (player === gameLogic.BLACK) {
-      gameLogic.ai(board, level).then(() => {
+      gameLogic.ai(board, level).then((move) => {
+        gameLogic.movePiece(board, move.from_x, move.from_y, move.to_x, move.to_y);
+        let fromImg = document.getElementsByName(String(move.from_y)+","+String(move.from_x));
+        let toImg = document.getElementsByName(String(move.to_y)+","+String(move.to_x));
+        setToImg(toImg[0]);
+        setFromImg(fromImg[0]);
+        fromImg[0].setAttribute("style", "border: 1px solid rgba(255,0,1,1);")
+        toImg[0].setAttribute("style", "border: 1px solid rgba(255,0,1,1);")
         setBoard([...board]);
         if (checkForWinner(board)) return true;
         moveAudio.play();

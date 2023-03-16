@@ -8,6 +8,7 @@ function renderImages(board, size, dragStart, dragDrop, dragEnd, disable) {
                 game.push(<img
                     pos_i={i}
                     pos_j={j}
+                    name={i + "," + j}
                     key={i + "," + j}
                     src={"images/" + board[i][j] + ".png"}
                     alt={board[i][j]}
@@ -23,6 +24,7 @@ function renderImages(board, size, dragStart, dragDrop, dragEnd, disable) {
                 game.push(<img
                     pos_i={i}
                     pos_j={j}
+                    name={i + "," + j}
                     key={i + "," + j}
                     src={"images/" + board[i][j] + ".png"}
                     alt={board[i][j]}
@@ -33,7 +35,7 @@ function renderImages(board, size, dragStart, dragDrop, dragEnd, disable) {
     return game;
 }
 
-function Board({ board, size, dragStart, dragDrop, dragEnd, disable }) {
+function Board({ board, size, dragStart, dragDrop, dragEnd, disable}) {
     return (
         <div className='board_enclosure'>
             <div className="board">
