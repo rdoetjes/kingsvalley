@@ -99,16 +99,14 @@ function App() {
   }
 
   function changeLevelUp(e) {
-    let t_level = level
-    t_level++;
-    if (t_level > 5) t_level = 5;
+    let t_level = level;
+    t_level=t_level++>=5?5:t_level++;
     setLevel(t_level);
   }
 
   function changeLevelDown(e) {
-    let t_level = level
-    t_level--;
-    if (t_level < 2) t_level = 2;
+    let t_level =level;
+    t_level=t_level--<=2?2:t_level--;
     setLevel(t_level);
   }
 
