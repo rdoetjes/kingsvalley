@@ -73,7 +73,7 @@ a:visited{
 }
 
 .board_enclosure {
-  width: 33vw;
+  width: 38vw;
   border: 5px solid rgb(48, 46, 40);
   border-radius: 5px;
 }
