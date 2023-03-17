@@ -72,24 +72,24 @@ a:visited{
 }
 
 .board_enclosure {
-  border: 8px solid rgb(48, 46, 40);
+  width: 33vw;
+  border: 5px solid rgb(48, 46, 40);
   border-radius: 5px;
-  padding-left: 0;
 }
 
 .board {
-  width: 511px;
-  height: 510px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   background-image: url('images/bg_board.png');
-  background-size: cover;
-  display: flex;
-  flex-wrap: wrap;
-}
+  background-size: contain;
+}  
 
-img {
-  padding: 5px;
-  width: 90px;
-  height: 90px;
+.item {
+  max-height: 90%;
+  min-height: 90%;
+  max-width: 98%;
   background-color: rgba(255,0,0,0);
-  border: 1px solid rgba(123,123,123,0.2);
+  border: 1px solid rgba(123,123,123,0);
 }

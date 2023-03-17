@@ -8,6 +8,7 @@ function renderImages(board, size, dragStart, dragDrop, dragEnd, disable) {
                 game.push(<img
                     pos_i={i}
                     pos_j={j}
+                    className="item"
                     name={i + "," + j}
                     key={i + "," + j}
                     src={"images/" + board[i][j] + ".png"}
@@ -24,6 +25,7 @@ function renderImages(board, size, dragStart, dragDrop, dragEnd, disable) {
                 game.push(<img
                     pos_i={i}
                     pos_j={j}
+                    className="item"
                     name={i + "," + j}
                     key={i + "," + j}
                     src={"images/" + board[i][j] + ".png"}
