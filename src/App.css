@@ -1,6 +1,7 @@
 body {
   background-image: url('images/bg.webp'); 
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .level_btn{
@@ -83,7 +84,8 @@ a:visited{
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   background-image: url('images/bg_board.png');
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
 }  
 
 .item {
