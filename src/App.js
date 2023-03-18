@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Board from './components/Board'
 import GameLogic from "./GameLogic.js"
 import './App.css';
 
 function App() {
+  let legalMove = useRef();
+  let fromPos = useRef();
   const [gameLogic] = useState(new GameLogic());
   const [board, setBoard] = useState(Array.from({ length: gameLogic.N }, () => Array.from({ length: gameLogic.N }, () => 0)));
-  const [fromPos, setFromPos] = useState(null);
   const [player, setPlayer] = useState(0);
   const [disable, setDisable] = useState(false);
-  const [legalMove, setLegalmove] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState('');
   const [level, setLevel] = useState(4);
   const [toImg, setToImg] = useState(null);
@@ -38,8 +38,8 @@ function App() {
   }, [toImg, fromImg]);
 
   function dragStart(e) {
-    setLegalmove(false);
-    setFromPos(e.target);
+    legalMove = false;
+    fromPos = e.target;
   }
 
   function dragDrop(e) {
@@ -53,7 +53,7 @@ function App() {
       moveAudio.play();
       checkForWinner(board);
       setBoard([...board]);
-      setLegalmove(true);
+      legalMove = true;
       document.body.style.cursor = "wait"; 
       return;
     }
