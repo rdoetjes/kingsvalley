@@ -124,7 +124,7 @@ function App() {
     setDisable(false);
     setBoard(gameLogic.initBoard(gameNr));
     setPlayer(0);
-    resetAllTitlesToNormal()
+    resetAllTitlesToNormal();
     document.body.style.cursor = "";
   }
 
