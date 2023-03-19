@@ -111,11 +111,20 @@ function App() {
     restartGame(0);
   }
 
+  function resetAllTitlesToNormal(){
+    for (let j=0; j<gameLogic.N; j++){
+      for (let i=0; i<gameLogic.N; i++){
+        document.getElementsByName(String(j)+","+String(i))[0].setAttribute("style", "background-color: rgba(255,0,0,0);");
+      }
+    }
+  }
+
   function restartGame(gameNr) {
     setWinnerMessage('');
     setDisable(false);
     setBoard(gameLogic.initBoard(gameNr));
     setPlayer(0);
+    resetAllTitlesToNormal()
     document.body.style.cursor = "";
   }
 
