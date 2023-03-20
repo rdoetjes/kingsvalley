@@ -85,8 +85,8 @@ function App() {
     if (!fromImg || !toImg)
      return;
      
-    setToImg(fromImg);
-    setFromImg(toImg);
+    setToImg(toImg);
+    setFromImg(fromImg);
     highLightToFromOpacity(fromImg, toImg, 0.2);
   }
 
