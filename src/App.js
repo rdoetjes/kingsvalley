@@ -48,9 +48,9 @@ function App() {
 
     if (gameLogic.didPlayerMakeLegalMove(player, board, from_x, from_y, to_x, to_y)) {
       gameLogic.movePiece(board, from_x, from_y, to_x, to_y);
+      setBoard([...board]);
       moveAudio.play();
       checkForWinner(board);
-      setBoard([...board]);
       legalMove = true;
       document.body.style.cursor = "wait"; 
       return;
