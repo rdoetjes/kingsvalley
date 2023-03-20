@@ -78,7 +78,6 @@ function App() {
     if(toImg && fromImg){
       fromImg.setAttribute("style", "background-color: rgba(255,0,0,"+alpha.toString()+");");
       toImg.setAttribute("style", "background-color: rgba(255,0,0,0"+alpha.toString()+");")
-      console.log(toImg, fromImg);  
     }
   }
 
